@@ -122,11 +122,11 @@ class TexUnicodeHover implements vscode.HoverProvider {
 	): Thenable<vscode.Hover> {
 		let unicodeRegexAny = new RegExp(/(\\U?char['"]?[\da-fA-F]{1,8}|\^{2,6}[\da-f]{2,6})/); // General form.
 		let unicodeRegexCharDec = new RegExp(/\\char([\d]{1,7})/); // Decimal form: \char98
-		let unicodeRegexCharOct = new RegExp(/\\char'([\da-fA-F]{1,8})/); // Octal form: \char'98.
-		let unicodeRegexCharHex = new RegExp(/\\char"([\da-fA-F]{1,8})/); // Hexadecimal form: \char"98.
+		let unicodeRegexCharOct = new RegExp(/\\char'([0-7]{1,8})/); // Octal form: \char'98.
+		let unicodeRegexCharHex = new RegExp(/\\char"([\dA-F]{1,8})/); // Hexadecimal form: \char"98.
 		let unicodeRegexUcharDec = new RegExp(/\\Uchar([\d]{1,7})/); // Decimal form: \Uchar98
 		let unicodeRegexUcharOct = new RegExp(/\\Uchar'([0-7]{1,8})/); // Octal form: \Uchar'98.
-		let unicodeRegexUcharHex = new RegExp(/\\Uchar"([\da-fA-F]{1,8})/); // Hexadecimal form: \Uchar"98.
+		let unicodeRegexUcharHex = new RegExp(/\\Uchar"([\dA-F]{1,8})/); // Hexadecimal form: \Uchar"98.
 		let unicodeRegexPrimitive6 = new RegExp(/\^{6}([\da-f]{6})/); // Hexadecimal form: ^^^^^^0000ff
 		let unicodeRegexPrimitive4 = new RegExp(/\^{4}([\da-f]{4})/); // 4 hexadecimal: ^^^^00ff
 		let unicodeRegexPrimitive2 = new RegExp(/\^{2}([\da-f]{2})/); // 2 hexadecimal: ^^ff.
