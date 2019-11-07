@@ -1,65 +1,53 @@
-# unicodehover README
+# UnicodeHover
 
-This is the README for your extension "unicodehover". After writing up a brief description, we recommend including the following sections.
+![img](./img/simple_demo.gif)
+
+UnicodeHover lets you see a glyph of the character represented by a Unicode escape. Say you wanted to create a set of all punctuation in Unicode. One (unsightly) way of doing it is as follows.
+```python
+import string
+from itertools import chain
+punctuation = \
+      set(string.punctuation) | \
+      set("！＂＃＄％＆＇（）＊＋，－．／：；＜＝＞？＠［＼］＾＿｀｛｜｝～、。〃〈〉《》「」『』【】〔〕〖〗〘〙〚〛〜〝〞〟｟｠｡｢｣､･゠〰⦅⦆") | \
+      set("«‹»›„‚“‟‘‛”’❛❜\u275F❝❞❮❯⹂〝〞〟＂") | \
+      set("\u002E\u0964\u0589\u3002\u06d4\u2cf9\u0701\u1362\u166e\u1803\u2cfe\uA4ff\ua60e\ua6f3\u083d\u1b5f\u002c\u060c\u3001\u055d\u07f8\u1363\u1808\u14fe\ua60d\ua6f5\u1b5e\u003f\u037e\u00bf\u061f\u055e\u0706\u1367\u2cfa\u2cfb\ua60f\u16f7\U00011143\uaaf1\u0021\u00a1\u07f9\u1944\u00b7\U0001039f\U000103d0\U00012470\u1361\u1680\U0001091f\u0830\u2014\u2013\u2012\u2010\u2043\ufe63\uff0d\u058a\u1806\u003b\u0387\u061b\u1364\u16f6\u2024\u003a\u1365\ua6f4\u1b5d\u2026\ufe19\u0eaf\u00ab\u2039\u00bb\u203a\u201e\u201a\u201c\u201f\u2018\u201b\u201d\u2019\u0022") | \
+      set(map(chr, chain(range(0x2010, 0x2028), range(0x2030, 0x205F)))) | \
+      set(map(chr, range(0x2E00, 0x2E50)))
+```
+
+Alternatively, let's say you have a regex to remove all non-printable characters, such as `DEL`.
+
+```python
+unprintables = re.compile(r"[\u0000-\u001f]")
+```
+
+Maybe your coworkers don't use VS Code and have used escapes so that their editors don't show them [_mojibake_](https://en.wikipedia.org/wiki/Mojibake).
+
+In any of the above cases, it would be handy to immediately have information on the characters being processed instead of, e.g., going to an external website and searching for the codepoint.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Simply place your cursor over the escape sequence and a panel will hover over it, showing you the glyph in question.
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- Works on Python, JavaScript or LaTeX (TODO: will it work without LaTeX-Workshop?) files.
+- A font that defines a glyph for the character to be displayed.
+
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+TODO
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+TODO
 
 ## Release Notes
 
 Users appreciate release notes as you update your extension.
 
-### 1.0.0
+### 0.0.1
 
-Initial release of ...
+Alpha!
 
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
