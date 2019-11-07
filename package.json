@@ -1,7 +1,7 @@
 {
 	"name": "unicodehover",
 	"displayName": "UnicodeHover",
-	"description": "",
+	"description": "Hover over Unicode escapes to see a glyph of the character.",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.39.0"
