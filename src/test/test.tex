@@ -1,0 +1,23 @@
+%% test.tex
+% Test UnicodeHover.
+%%
+
+\documentclass{minimal}
+
+\begin{document}
+    % \char command (LaTeX?)
+    \char'377
+    \char255
+    \char"ff
+
+    % \Uchar command (XeLaTeX only?)
+    \Uchar'377
+    \Uchar255
+    \Uchar"ff
+
+    % Primitive (TeX).
+    ^^ff
+    ^^^^00ff
+    ^^^^^^0000ff
+\end{document}
+
