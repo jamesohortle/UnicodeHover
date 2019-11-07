@@ -4,3 +4,4 @@ node_modules
 *.vsix
 src/test/.mypy_cache
 .mypy_cache
+.DS_Store
