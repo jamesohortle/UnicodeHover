@@ -10,7 +10,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"onLanguage:python",
 	],
 	"main": "./out/extension.js",
 	"contributes": {
