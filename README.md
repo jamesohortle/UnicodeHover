@@ -28,14 +28,14 @@ In any of the above cases, it would be handy to immediately have information on 
 ## Features
 
 Simply place your cursor over the escape sequence and a panel will hover over it, showing you the glyph in question.
+
 - Recognizes the escape sequences as used by the Unicode Consortium (`U+` followed by 4 to 6 hexadecimal digits) in any file.
 - Recognizes the escape sequences for that language.
 
 ## Requirements
 
-- Works on Python, JavaScript or TeX (TODO: will it work without LaTeX-Workshop?) files.
-- Needs a font that defines a glyph for the character to be displayed.
-
+- Works on Python, JavaScript or TeX files.
+- Needs a system font that defines a glyph for the character to be displayed.
 
 ## Extension Settings
 
@@ -43,11 +43,11 @@ TODO
 
 ## Known Issues
 
-TODO
+- Non-printable characters will not show in the panel. See issue #3.
+- On Mac, even if `Apple Color Emoji` font is installed, no glyph is shown.
+- TODO: will it work without LaTeX-Workshop for .tex files?
 
 ## Release Notes
-
-Users appreciate release notes as you update your extension.
 
 ### 0.0.1
 
