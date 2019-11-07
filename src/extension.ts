@@ -74,11 +74,11 @@ class JSUnicodeHover implements vscode.HoverProvider {
 	public provideHover(
 		document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
 	): Thenable<vscode.Hover> {
-		let unicodeRegexAny = new RegExp(/\\(u|x)?\{?([\da-fA-F]{1,6})\}?/); // General form.
-		let unicodeRegexOct = new RegExp(/\\([0-7]){1,3}/); // Octal-escape form: \123.
+		let unicodeRegexAny = new RegExp(/\\(u|x)?\{?([\da-fA-F]+)\}?/); // General form.
+		let unicodeRegexOct = new RegExp(/\\([0-7]{1,3})/); // Octal-escape form: \123.
 		let unicodeRegex2 = new RegExp(/\\x([\da-fA-F]{2})/); // Hex-escape form: "\xA7".
 		let unicodeRegex4 = new RegExp(/\\u([\da-fA-F]{4})/); // Short form: "\uabcd".
-		let unicodeRegex8 = new RegExp(/\\u\{([\da-fA-F]{1,6})\}/); // Long form: "\u{abcd1234}".
+		let unicodeRegex8 = new RegExp(/\\u\{([\da-fA-F]+)\}/); // Long form: "\u{abcd1234}".
 
 		const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
 
