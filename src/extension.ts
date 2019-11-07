@@ -69,10 +69,57 @@ class PyUnicodeHover implements vscode.HoverProvider {
 
 	public dispose() { }
 }
+
+class JSUnicodeHover implements vscode.HoverProvider {
+	public provideHover(
+		document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
+	): Thenable<vscode.Hover> {
+		let unicodeRegexAny = new RegExp(/\\(u|x)?\{?([\da-fA-F]{1,6})\}?/); // General form.
+		let unicodeRegexOct = new RegExp(/\\([0-7]){1,3}/); // Octal-escape form: \123.
+		let unicodeRegex2 = new RegExp(/\\x([\da-fA-F]{2})/); // Hex-escape form: "\xA7".
+		let unicodeRegex4 = new RegExp(/\\u([\da-fA-F]{4})/); // Short form: "\uabcd".
+		let unicodeRegex8 = new RegExp(/\\u\{([\da-fA-F]{1,6})\}/); // Long form: "\u{abcd1234}".
+
+		const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
+
+		if (range === undefined) {
+			return new Promise((_resolve, reject) => {
+				reject("Range undefined.");
+			});
+		}
+		const word = document.getText(range);
+		console.log(`JS ${word}`);
+
+		return new Promise((resolve, reject) => {
+			if (word.match(unicodeRegex8)) {
+				let codePoint = parseInt(word.match(unicodeRegex8)![1], 16);
+				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				return;
+			} else if (word.match(unicodeRegex4)) {
+				let codePoint = parseInt(word.match(unicodeRegex4)![1], 16);
+				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				return;
+			} else if (word.match(unicodeRegex2)) {
+				let codePoint = parseInt(word.match(unicodeRegex2)![1], 16);
+				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				return;
+			} else if (word.match(unicodeRegexOct)) {
+				let codePoint = parseInt(word.match(unicodeRegexOct)![1], 8);
+				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				return;
+			} else {
+				reject("Not a Unicode escape.");
+			}
+		});
+	}
+
+	public dispose() { }
+}
 // Provide the hovers.
 export function activate(context: vscode.ExtensionContext): void {
 	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file' }, new UnicodeHover()));
 	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'python' }, new PyUnicodeHover()));
+	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'javascript' }, new JSUnicodeHover()));
 	console.log("UnicodeHover: provider pushed.");
 }
 

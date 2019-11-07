@@ -11,6 +11,7 @@
 	],
 	"activationEvents": [
 		"onLanguage:python",
+		"onLanguage:javascript"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
