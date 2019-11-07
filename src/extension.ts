@@ -1,26 +1,42 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+/**
+ * Provide a basic hover that recognizes Unicode escapes as used by the Unicode Consortium.
+ * I.e., recognize escapes like U+ABCD, U+12345, U+A1B2C3, which refer to official codepoints.
+ */
+class UnicodeHover implements vscode.HoverProvider {
+	public provideHover(
+		document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
+	): Thenable<vscode.Hover> {
+		let unicodeRegexAny = new RegExp(/U\+([A-F\d]{4,6})/);
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "unicodehover" is now active!');
+		const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
+		if (range === undefined) {
+			return new Promise((_resolve, reject) => {
+				reject("Range undefined.");
+			});
+		}
+		const word = document.getText(range);
+		console.log(`UH ${word}`);
+		return new Promise((resolve, reject) => {
+			if (word.match(unicodeRegexAny)) {
+				let codePoint = parseInt(word.match(unicodeRegexAny)![1], 16);
+				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				return;
+			} else {
+				reject("Not a Unicode escape.");
+			}
+		});
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World!');
-	});
+	}
+	public dispose() { }
+}
 
-	context.subscriptions.push(disposable);
+// Provide the hovers.
+export function activate(context: vscode.ExtensionContext): void {
+	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file' }, new UnicodeHover()));
+	console.log("UnicodeHover: provider pushed.");
 }
 
 // this method is called when your extension is deactivated
