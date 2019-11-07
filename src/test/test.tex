@@ -5,19 +5,25 @@
 \documentclass{minimal}
 
 \begin{document}
+    % In comments.
+    % U+00FF -> ÿ Latin Small Letter Y with Diaeresis.
+    % U+1234 -> ሴ Ethiopic Syllable See.
+    % U+0B87 -> இ Tamil Letter I.
+    % U+50B7 -> 傷 Ideograph wound, injury; fall ill from CJK.
+
     % \char command (LaTeX?)
-    \char'377
-    \char255
-    \char"ff
+    \char'377\char'11064\char'5607\char'50267
+    \char255\char4660\char2951\char20663
+    \char"ff\char"1234\char"0b87\char"50b7
 
     % \Uchar command (XeLaTeX only?)
-    \Uchar'377
-    \Uchar255
-    \Uchar"ff
+    \Uchar'377\Uchar'11064\Uchar'5607\Uchar'50267
+    \Uchar255\Uchar4660\Uchar2951\Uchar20663
+    \Uchar"ff\Uchar"1234\Uchar"0b87\Uchar"50b7
 
     % Primitive (TeX).
     ^^ff
-    ^^^^00ff
-    ^^^^^^0000ff
+    ^^^^00ff^^^^1234^^^^0b87^^^^50b7
+    ^^^^^^0000ff^^^^^^001234^^^^^^000b87^^^^^^0050b7
 \end{document}
 
