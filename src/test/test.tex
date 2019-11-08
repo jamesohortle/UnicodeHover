@@ -4,20 +4,55 @@
 
 \documentclass{minimal}
 
+\usepackage[utf8]{inputenc}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+\setotherlanguages{amharic, tamil}
+\newfontfamily\amharicfont[Script=Ethiopic]{Kefa}
+\newfontfamily\tamilfont[Script=Tamil]{InaiMathi}
+
+\usepackage{xeCJK}
+\setCJKmainfont{STFangsong}
+\setCJKsansfont{STKaiti}
+\setCJKmonofont{STHeiti}
+
 \begin{document}
+    % In comments.
+    % U+00FF -> ÿ Latin Small Letter Y with Diaeresis.
+    % U+1234 -> ሴ Ethiopic Syllable See.
+    % U+0B87 -> இ Tamil Letter I.
+    % U+50B7 -> 傷 Ideograph wound, injury; fall ill from CJK.
+
+    % In plain text.
+    U+00FF \(\rightarrow\) ÿ Latin Small Letter Y with Diaeresis.
+
+    U+1234 \(\rightarrow\) \textamharic{ሴ} Ethiopic Syllable See.
+    
+    U+0B87 \(\rightarrow\) \texttamil{இ} Tamil Letter I.
+    
+    U+50B7 \(\rightarrow\) 傷 Ideograph wound, injury; fall ill from CJK.
+
     % \char command (LaTeX?)
-    \char'377
-    \char255
-    \char"ff
+    \char'377\textamharic{\char'11064}\texttamil{\char'5607}\char'50267
+
+    \char255\textamharic{\char4660}\texttamil{\char2951}\char20663
+    
+    \char"00FF\textamharic{\char"1234}\texttamil{\char"0B87}\char"50B7
+
 
     % \Uchar command (XeLaTeX only?)
-    \Uchar'377
-    \Uchar255
-    \Uchar"ff
+    \Uchar'377\textamharic{\Uchar'11064}\texttamil{\Uchar'5607}\Uchar'50267
+    
+    \Uchar255\textamharic{\Uchar4660}\texttamil{\Uchar2951}\Uchar20663
+    
+    \Uchar"00FF\textamharic{\Uchar"1234}\texttamil{\Uchar"0B87}\Uchar"50B7
 
     % Primitive (TeX).
-    ^^ff
-    ^^^^00ff
-    ^^^^^^0000ff
+    ^^ff % Double caret range: 00 -- ff
+    
+    ^^^^00ff\textamharic{^^^^1234}\texttamil{^^^^0b87}^^^^50b7
+    
+    ^^^^^^0000ff\textamharic{^^^^^^001234}\texttamil{^^^^^^000b87}^^^^^^0050b7
 \end{document}
 

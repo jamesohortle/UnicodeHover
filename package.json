@@ -2,7 +2,9 @@
 	"name": "unicodehover",
 	"displayName": "UnicodeHover",
 	"description": "Hover over Unicode escapes to see a glyph of the character.",
+	"publisher": "jamesohortle",
 	"version": "0.0.1",
+	"license": "MIT",
 	"engines": {
 		"vscode": "^1.39.0"
 	},
@@ -12,6 +14,7 @@
 	"activationEvents": [
 		"onLanguage:python",
 		"onLanguage:javascript",
+		"onLanguage:typescript",
 		"onLanguage:latex"
 	],
 	"main": "./out/extension.js",
@@ -28,10 +31,24 @@
 		"@types/mocha": "^5.2.7",
 		"@types/node": "^12.11.7",
 		"@types/vscode": "^1.39.0",
+		"electron-rebuild": "^1.8.6",
 		"glob": "^7.1.5",
 		"mocha": "^6.2.2",
-		"typescript": "^3.6.4",
 		"tslint": "^5.20.0",
+		"typescript": "^3.6.4",
 		"vscode-test": "^1.2.2"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jamesohortle/UnicodeHover"
+	},
+	"dependencies": {
+		"@types/better-sqlite3": "^5.4.0",
+		"@types/sqlite3": "^3.1.5",
+		"better-sqlite3": "^5.4.3",
+		"bootstrap-amd": "^1.0.3",
+		"bootstrap-fork": "^3.3.6",
+		"electron": "^6.0.0",
+		"sqlite3": "^4.1.0"
 	}
 }

@@ -74,11 +74,11 @@ class JSUnicodeHover implements vscode.HoverProvider {
 	public provideHover(
 		document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
 	): Thenable<vscode.Hover> {
-		let unicodeRegexAny = new RegExp(/\\(u|x)?\{?([\da-fA-F]{1,6})\}?/); // General form.
-		let unicodeRegexOct = new RegExp(/\\([0-7]){1,3}/); // Octal-escape form: \123.
+		let unicodeRegexAny = new RegExp(/\\(u|x)?\{?([\da-fA-F]+)\}?/); // General form.
+		let unicodeRegexOct = new RegExp(/\\([0-7]{1,3})/); // Octal-escape form: \123.
 		let unicodeRegex2 = new RegExp(/\\x([\da-fA-F]{2})/); // Hex-escape form: "\xA7".
 		let unicodeRegex4 = new RegExp(/\\u([\da-fA-F]{4})/); // Short form: "\uabcd".
-		let unicodeRegex8 = new RegExp(/\\u\{([\da-fA-F]{1,6})\}/); // Long form: "\u{abcd1234}".
+		let unicodeRegex8 = new RegExp(/\\u\{([\da-fA-F]+)\}/); // Long form: "\u{abcd1234}".
 
 		const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
 
@@ -122,11 +122,11 @@ class TexUnicodeHover implements vscode.HoverProvider {
 	): Thenable<vscode.Hover> {
 		let unicodeRegexAny = new RegExp(/(\\U?char['"]?[\da-fA-F]{1,8}|\^{2,6}[\da-f]{2,6})/); // General form.
 		let unicodeRegexCharDec = new RegExp(/\\char([\d]{1,7})/); // Decimal form: \char98
-		let unicodeRegexCharOct = new RegExp(/\\char'([\da-fA-F]{1,8})/); // Octal form: \char'98.
-		let unicodeRegexCharHex = new RegExp(/\\char"([\da-fA-F]{1,8})/); // Hexadecimal form: \char"98.
+		let unicodeRegexCharOct = new RegExp(/\\char'([0-7]{1,8})/); // Octal form: \char'98.
+		let unicodeRegexCharHex = new RegExp(/\\char"([\dA-F]{1,8})/); // Hexadecimal form: \char"98.
 		let unicodeRegexUcharDec = new RegExp(/\\Uchar([\d]{1,7})/); // Decimal form: \Uchar98
 		let unicodeRegexUcharOct = new RegExp(/\\Uchar'([0-7]{1,8})/); // Octal form: \Uchar'98.
-		let unicodeRegexUcharHex = new RegExp(/\\Uchar"([\da-fA-F]{1,8})/); // Hexadecimal form: \Uchar"98.
+		let unicodeRegexUcharHex = new RegExp(/\\Uchar"([\dA-F]{1,8})/); // Hexadecimal form: \Uchar"98.
 		let unicodeRegexPrimitive6 = new RegExp(/\^{6}([\da-f]{6})/); // Hexadecimal form: ^^^^^^0000ff
 		let unicodeRegexPrimitive4 = new RegExp(/\^{4}([\da-f]{4})/); // 4 hexadecimal: ^^^^00ff
 		let unicodeRegexPrimitive2 = new RegExp(/\^{2}([\da-f]{2})/); // 2 hexadecimal: ^^ff.
@@ -193,6 +193,7 @@ export function activate(context: vscode.ExtensionContext): void {
 	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file' }, new UnicodeHover()));
 	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'python' }, new PyUnicodeHover()));
 	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'javascript' }, new JSUnicodeHover()));
+	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'typescript' }, new JSUnicodeHover())); // TS has same escapes as JS.
 	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'latex' }, new TexUnicodeHover()));
 	console.log("UnicodeHover: providers pushed.");
 }
