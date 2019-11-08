@@ -51,6 +51,6 @@ U+0B87\u0b87 \u{00000b87} -> இ Tamil Letter I.
 U+0FDA \u0fda \u{00000FDA} -> ࿚ Tibetan Mark Trailing Mchan Rtags.
 U+50B7\u50B7\u{000050B7} -> 傷 Ideograph wound, injury; fall ill from CJK.
 U+1F639 \u{001f639} -> 😹 Cat Face with Tears of Joy.
-\041\377\x21\xff
+\041\xff\x21\377
 `
 
