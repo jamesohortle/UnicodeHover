@@ -4,6 +4,7 @@
 	"description": "Hover over Unicode escapes to see a glyph of the character.",
 	"publisher": "jamesohortle",
 	"version": "0.0.1",
+	"license": "MIT",
 	"engines": {
 		"vscode": "^1.39.0"
 	},
