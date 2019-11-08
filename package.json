@@ -11,20 +11,6 @@
 	"categories": [
 		"Other"
 	],
-	"languages": [
-		{
-			"id": "latex",
-			"extensions": [
-				".tex"
-			],
-			"aliases": [
-				"latex",
-				"LaTeX",
-				"tex",
-				"TeX"
-			]
-		}
-	],
 	"activationEvents": [
 		"onLanguage:python",
 		"onLanguage:javascript",
