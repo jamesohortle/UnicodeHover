@@ -105,6 +105,10 @@ class PyUnicodeHover implements vscode.HoverProvider {
 	public dispose() { }
 }
 
+/**
+ * Provide a hover for JavaScript (TypeScript) files and the Unicode escapes therein.
+ * Octal, hexadecimal, short-u and u-with-braces forms are supported.
+ */
 class JSUnicodeHover implements vscode.HoverProvider {
 	public provideHover(
 		document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
@@ -159,6 +163,10 @@ class JSUnicodeHover implements vscode.HoverProvider {
 	public dispose() { }
 }
 
+/**
+ * Provide a hover for (La)TeX files and the Unicode escapes therein.
+ * Supports \char, \Uchar and caret (TeX primitive) notation.
+ */
 class TexUnicodeHover implements vscode.HoverProvider {
 	public provideHover(
 		document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
