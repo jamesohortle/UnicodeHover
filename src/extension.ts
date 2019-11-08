@@ -1,6 +1,36 @@
 import * as vscode from 'vscode';
 
 /**
+ * Get the description/name from the SQLite3 DB.
+ */
+function getUnicodeData(codePoint: number): string {
+	const Database = require('better-sqlite3');
+	const db = new Database('/Users/j-hortle/unicodehover/src/unicode_data.db', { verbose: console.log });
+	const stmt = db.prepare("SELECT description FROM data WHERE codepoint_dec = ?;");
+	const dec = stmt.get(codePoint);
+	if (dec === undefined || dec.description === null || dec.description === "") {
+		console.log(dec);
+		return "(No description)";
+	} else {
+		console.log(dec.description);
+		return dec.description;
+	}
+}
+
+/**
+ * Make a nice markdown string containing:
+ * - the glyph
+ * - the description
+ * - an external link
+ */
+function makeMarkdown(codePoint: number): vscode.MarkdownString {
+	const glyph = String.fromCharCode(codePoint);
+	const description = getUnicodeData(codePoint);
+	const externalLink = "https://unicode-table.com/en/" + codePoint.toString(16).toUpperCase();
+	return new vscode.MarkdownString(`${glyph} [${description}](${externalLink})`);
+}
+
+/**
  * Provide a basic hover that recognizes Unicode escapes as used by the Unicode Consortium.
  * I.e., recognize escapes like U+ABCD, U+12345, U+A1B2C3, which refer to official codepoints.
  */
@@ -22,7 +52,8 @@ class UnicodeHover implements vscode.HoverProvider {
 		return new Promise((resolve, reject) => {
 			if (word.match(unicodeRegexAny)) {
 				let codePoint = parseInt(word.match(unicodeRegexAny)![1], 16);
-				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				let markdown = makeMarkdown(codePoint);
+				resolve(new vscode.Hover(markdown));
 				return;
 			} else {
 				reject("Not a Unicode escape.");
@@ -57,10 +88,14 @@ class PyUnicodeHover implements vscode.HoverProvider {
 		return new Promise((resolve, reject) => {
 			if (word.match(unicodeRegex8)) {
 				let codePoint = parseInt(word.match(unicodeRegex8)![1], 16);
-				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				let markdown = makeMarkdown(codePoint);
+
+				resolve(new vscode.Hover(markdown));
 			} else if (word.match(unicodeRegex4)) {
 				let codePoint = parseInt(word.match(unicodeRegex4)![1], 16);
-				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				let markdown = makeMarkdown(codePoint);
+
+				resolve(new vscode.Hover(markdown));
 			} else {
 				reject("Not a Unicode escape.");
 			}
@@ -93,19 +128,27 @@ class JSUnicodeHover implements vscode.HoverProvider {
 		return new Promise((resolve, reject) => {
 			if (word.match(unicodeRegex8)) {
 				let codePoint = parseInt(word.match(unicodeRegex8)![1], 16);
-				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				let markdown = makeMarkdown(codePoint);
+
+				resolve(new vscode.Hover(markdown));
 				return;
 			} else if (word.match(unicodeRegex4)) {
 				let codePoint = parseInt(word.match(unicodeRegex4)![1], 16);
-				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				let markdown = makeMarkdown(codePoint);
+
+				resolve(new vscode.Hover(markdown));
 				return;
 			} else if (word.match(unicodeRegex2)) {
 				let codePoint = parseInt(word.match(unicodeRegex2)![1], 16);
-				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				let markdown = makeMarkdown(codePoint);
+
+				resolve(new vscode.Hover(markdown));
 				return;
 			} else if (word.match(unicodeRegexOct)) {
 				let codePoint = parseInt(word.match(unicodeRegexOct)![1], 8);
-				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				let markdown = makeMarkdown(codePoint);
+
+				resolve(new vscode.Hover(markdown));
 				return;
 			} else {
 				reject("Not a Unicode escape.");
@@ -143,41 +186,59 @@ class TexUnicodeHover implements vscode.HoverProvider {
 		return new Promise((resolve, reject) => {
 			if (word.match(unicodeRegexCharDec)) {
 				let codePoint = parseInt(word.match(unicodeRegexCharDec)![1], 10);
-				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				let markdown = makeMarkdown(codePoint);
+
+				resolve(new vscode.Hover(markdown));
 				return;
 			} else if (word.match(unicodeRegexCharOct)) {
 				let codePoint = parseInt(word.match(unicodeRegexCharOct)![1], 8);
-				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				let markdown = makeMarkdown(codePoint);
+
+				resolve(new vscode.Hover(markdown));
 				return;
 			} else if (word.match(unicodeRegexCharHex)) {
 				let codePoint = parseInt(word.match(unicodeRegexCharHex)![1], 16);
-				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				let markdown = makeMarkdown(codePoint);
+
+				resolve(new vscode.Hover(markdown));
 				return;
 			} else if (word.match(unicodeRegexUcharDec)) {
 				let codePoint = parseInt(word.match(unicodeRegexUcharDec)![1], 10);
-				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				let markdown = makeMarkdown(codePoint);
+
+				resolve(new vscode.Hover(markdown));
 				return;
 			}
 			else if (word.match(unicodeRegexUcharOct)) {
 				let codePoint = parseInt(word.match(unicodeRegexUcharOct)![1], 8);
-				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				let markdown = makeMarkdown(codePoint);
+
+				resolve(new vscode.Hover(markdown));
 				return;
 			} else if (word.match(unicodeRegexUcharHex)) {
 				let codePoint = parseInt(word.match(unicodeRegexUcharHex)![1], 16);
-				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				let markdown = makeMarkdown(codePoint);
+
+				resolve(new vscode.Hover(markdown));
 				return;
 			} else if (word.match(unicodeRegexPrimitive6)) {
 				let codePoint = parseInt(word.match(unicodeRegexPrimitive6)![1], 16);
-				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				let markdown = makeMarkdown(codePoint);
+
+				resolve(new vscode.Hover(markdown));
 				return;
 			}
 			else if (word.match(unicodeRegexPrimitive4)) {
 				let codePoint = parseInt(word.match(unicodeRegexPrimitive4)![1], 16);
-				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				let markdown = makeMarkdown(codePoint);
+
+				resolve(new vscode.Hover(markdown));
 				return;
 			} else if (word.match(unicodeRegexPrimitive2)) {
 				let codePoint = parseInt(word.match(unicodeRegexPrimitive2)![1], 16);
-				resolve(new vscode.Hover(String.fromCharCode(codePoint)));
+				let markdown = makeMarkdown(codePoint);
+
+				resolve(new vscode.Hover(markdown));
 				return;
 			} else {
 				reject("Not a Unicode escape.");
