@@ -8,9 +8,9 @@ UnicodeHover lets you see a glyph of the character represented by a Unicode esca
 unprintables = re.compile(r"[\u0000-\u001f]")
 ```
 
-Or perhaps your coworkers don't use VS Code and have used escapes so that their editors don't show them [_mojibake_](https://en.wikipedia.org/wiki/Mojibake) or � (`U+FFFD`).
+Or perhaps your coworkers don't have the necessary fonts to display glyphs and have used escapes so that their editors don't show them [_mojibake_](https://en.wikipedia.org/wiki/Mojibake) or � (`U+FFFD`).
 
-It would be handy to immediately have information on the characters being processed instead of, e.g., going to an external website and searching for the codepoint.
+In any case, it would be handy to immediately have information on the characters being processed instead of, e.g., going to an external website and searching for the codepoint.
 
 ## Usage/Features
 
@@ -20,7 +20,7 @@ Simply place your cursor over the escape sequence and a panel will hover over it
 - Recognizes Unicode escape sequences in Python, JavaScript (TypeScript) and (La)TeX files.
 - Renders a glyph of the character using a system font (see [Requirements](#requirements)).
 - Provides a one-line description of the character in English.
-- Provides a link to the [Unicode Table](https://unicode-table.com) page for the character for further information.
+- Provides a link to the [Unicode Table](https://unicode-table.com) page (no affiliation) for the character for further information.
 
 ## Requirements
 
