@@ -1,20 +1,20 @@
 import * as vscode from 'vscode';
 
+import { unicodeData } from './unicode_data';
+
+const MAX_CODE_POINT = 1114111; // == 10FFFF
+
 /**
- * Get the description/name from the SQLite3 DB.
+ * Get the description/name from the object.
  */
 function getUnicodeData(codePoint: number): string {
-	const Database = require('better-sqlite3');
-	const db = new Database('/Users/j-hortle/unicodehover/src/unicode_data.db', { verbose: console.log });
-	const stmt = db.prepare("SELECT description FROM data WHERE codepoint_dec = ?;");
-	const dec = stmt.get(codePoint);
-	if (dec === undefined || dec.description === null || dec.description === "") {
-		console.log(dec);
-		return "(No description)";
-	} else {
-		console.log(dec.description);
-		return dec.description;
+	let description = unicodeData[codePoint];
+	if (codePoint > MAX_CODE_POINT) {
+		description = "(Too big)";
+	} else if (description === undefined || description === "" || description === null) {
+		description = "(No description)";
 	}
+	return description;
 }
 
 /**
@@ -24,10 +24,11 @@ function getUnicodeData(codePoint: number): string {
  * - an external link
  */
 function makeMarkdown(codePoint: number): vscode.MarkdownString {
-	const glyph = String.fromCharCode(codePoint);
+	const glyph = codePoint <= MAX_CODE_POINT ? String.fromCodePoint(codePoint) : "\u{fffd}";
 	const description = getUnicodeData(codePoint);
-	const externalLink = "https://unicode-table.com/en/" + codePoint.toString(16).toUpperCase();
-	return new vscode.MarkdownString(`${glyph} [${description}](${externalLink})`);
+	const externalLink = "https://unicode-table.com/en/" + (codePoint <= MAX_CODE_POINT ? codePoint.toString(16).toUpperCase() : "");
+	const markdown = `${glyph} [${description}](${externalLink}) (UnicodeHover)`;
+	return new vscode.MarkdownString(markdown);
 }
 
 /**
@@ -43,18 +44,19 @@ class UnicodeHover implements vscode.HoverProvider {
 		const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
 
 		if (range === undefined) {
-			return new Promise((_resolve, reject) => {
-				reject("Range undefined.");
+			return new Promise((resolve, _reject) => {
+				resolve(); // Resolve silently.
 			});
 		}
 		const word = document.getText(range);
-		console.log(`UH ${word}`);
+		console.log(`UnicodeHover: ${word}`);
 		return new Promise((resolve, reject) => {
 			if (word.match(unicodeRegexAny)) {
-				let codePoint = parseInt(word.match(unicodeRegexAny)![1], 16);
+				const codePoint = parseInt(word.match(unicodeRegexAny)![1], 16);
+				console.log(`${codePoint} > ${MAX_CODE_POINT}`);
+
 				let markdown = makeMarkdown(codePoint);
 				resolve(new vscode.Hover(markdown));
-				return;
 			} else {
 				reject("Not a Unicode escape.");
 			}
@@ -79,12 +81,12 @@ class PyUnicodeHover implements vscode.HoverProvider {
 
 		const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
 		if (range === undefined) {
-			return new Promise((_resolve, reject) => {
-				reject("Range undefined.");
+			return new Promise((resolve, _reject) => {
+				resolve(); // Resolve silently.
 			});
 		}
 		const word = document.getText(range);
-		console.log(`PH ${word}`);
+		console.log(`PyUnicodeHover: ${word}`);
 		return new Promise((resolve, reject) => {
 			if (word.match(unicodeRegex8)) {
 				let codePoint = parseInt(word.match(unicodeRegex8)![1], 16);
@@ -122,12 +124,12 @@ class JSUnicodeHover implements vscode.HoverProvider {
 		const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
 
 		if (range === undefined) {
-			return new Promise((_resolve, reject) => {
-				reject("Range undefined.");
+			return new Promise((resolve, _reject) => {
+				resolve(); // Resolve silently.
 			});
 		}
 		const word = document.getText(range);
-		console.log(`JS ${word}`);
+		console.log(`JSUnicodeHover ${word}`);
 
 		return new Promise((resolve, reject) => {
 			if (word.match(unicodeRegex8)) {
@@ -185,12 +187,12 @@ class TexUnicodeHover implements vscode.HoverProvider {
 		const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
 
 		if (range === undefined) {
-			return new Promise((_resolve, reject) => {
-				reject("Range undefined.");
+			return new Promise((resolve, _reject) => {
+				resolve(); // Resolve silently.
 			});
 		}
 		const word = document.getText(range);
-		console.log(`TX ${word}`);
+		console.log(`TexUnicodeHover ${word}`);
 		return new Promise((resolve, reject) => {
 			if (word.match(unicodeRegexCharDec)) {
 				let codePoint = parseInt(word.match(unicodeRegexCharDec)![1], 10);

@@ -1,6 +1,6 @@
 # UnicodeHover
 
-![img](./img/simple_demo.gif)
+![img](./img/demo.gif)
 
 [![CircleCI](https://circleci.com/gh/jamesohortle/UnicodeHover/tree/master.svg?style=svg&circle-token=3e37509dd484de97a96efe5931aa37f689a09c15)](https://circleci.com/gh/jamesohortle/UnicodeHover/tree/master)
 
@@ -44,3 +44,6 @@ Pull requests (in particular for new languages) are welcome.
 
 Alpha!
 
+## About the icon.
+
+The character in the icon is `U+1234 ETHIOPIC SYLLABLE SEE`, which is part of the Geʽez script used for several Ethiopic languages, in particular Amharic. Although `SEE` is most likely pronounced `seː`, it represents the idea that you can "see" glyphs as easily as 1, 2, 3(, 4). It also just looks pretty!
