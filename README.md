@@ -35,7 +35,7 @@ Simply place your cursor over the escape sequence and a panel will hover over it
 Pull requests (in particular for new languages) are welcome.
 
 - Non-printable characters, by definition, do not normally have glyphs associated with them and so no glpyhs will be displayed. However, the description and link will still be shown.
-- On Mac, even if, e.g., `Apple Color Emoji` font is installed, no glyph or a box is shown.
+- On Mac, even if, e.g., `Apple Color Emoji` font is installed, sometimes no glyph or a box is shown.
 - [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop) is required for .tex files.
 
 ## Release Notes
