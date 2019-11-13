@@ -42,3 +42,14 @@ U+50B7\u50B7\U000050B7 -> 傷 Ideograph wound, injury; fall ill from CJK.
 U+1F639 \U0001f639-> 😹 Cat Face with Tears of Joy.
 '''
 # fmt: on
+
+"U+0080"
+"U+0081"
+"U+0084"
+"U+0099"
+"U+FFF9"
+"U+FFFA"
+"U+FFFB"
+"U+1B2C7"
+"U+17000"
+"\UFFFFFFFF"
