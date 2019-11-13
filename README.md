@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="./img/icon.png" widhth=100 height=100>
+</p>
+
 # UnicodeHover
 
 ![img](./img/demo.gif)
