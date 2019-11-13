@@ -34,16 +34,28 @@ Simply place your cursor over the escape sequence and a panel will hover over it
 
 Pull requests (in particular for new languages) are welcome.
 
-- Non-printable characters, by definition, do not normally have glyphs associated with them and so no glpyhs will be displayed. However, the description and link will still be shown.
-- On Mac, even if, e.g., `Apple Color Emoji` font is installed, sometimes no glyph or a box is shown.
+- Non-printable characters, by definition, do not normally have glyphs associated with them and so usually no glpyhs will be displayed. However, the description and link will still be shown. If a font somewhere on your system defines a glyph for a non-printable character, it will be displayed.
+- ~~On Mac, even if, e.g., `Apple Color Emoji` font is installed, sometimes no glyph or a box is shown.~~ This seems to have resolved.
 - [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop) is required for .tex files.
 
 ## Release Notes
+
+### 0.0.3
+
+Fix more descriptions.
+
+### 0.0.2
+
+Fix some descriptions.
 
 ### 0.0.1
 
 Alpha!
 
-## About the icon.
+## Data sources
+
+The data for this project were taken from the [Unicode Consortium](https://home.unicode.org/)'s [Unicode Data](https://www.unicode.org/Public/UCD/latest/) collection. The data follows their licensing (cf.: [terms of use](http://www.unicode.org/terms_of_use.html)).
+
+## About the icon
 
 The character in the icon is `U+1234 ETHIOPIC SYLLABLE SEE`, which is part of the Geʽez script used for several Ethiopic languages, in particular Amharic. Although `SEE` is most likely pronounced `seː`, it represents the idea that you can "see" glyphs as easily as 1, 2, 3(, 4). It also just looks pretty!
