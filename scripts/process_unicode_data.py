@@ -69,13 +69,14 @@ def yield_non_unihan(
             continue
         block = char.get("blk")
         if block == "Nushu":
-            _name = ideograph_octothorpe.sub(" ", char.get("na"))
-            nushu_duben = "(女書讀本: " + (char.get("kSrc_NushuDuben") or "?") + ")"
-            name = _name + nushu_duben
+            _name = ideograph_octothorpe.sub("", char.get("na"))
+            reading = char.get("kReading", "")
+            nushu_duben = "(NǚshūDūběn: " + (char.get("kSrc_NushuDuben", "?")) + ")"
+            name = " ".join((_name, reading, nushu_duben))
         elif block == "Tangut":
-            _name = ideograph_octothorpe.sub(" ", char.get("na"))
-            tangut_source = "(Ref: " + (char.get("kTGT_MergedSrc") or "?") + ")"
-            name = _name + tangut_source
+            _name = ideograph_octothorpe.sub("", char.get("na"))
+            tangut_source = "(Ref: " + (char.get("kTGT_MergedSrc", "?")) + ")"
+            name = " ".join((_name, tangut_source))
         else:
             name = char.get("na") or char.get("na1") or get_alias(char)
         yield (int(codepoint, base=16), name.title())
