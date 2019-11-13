@@ -1,14 +1,16 @@
 import * as vscode from 'vscode';
 
-import { unicodeData } from './unicode_data';
+import * as unicodeDataJson from './unicode_data.json';
 
-const MAX_CODE_POINT = 1114111; // == 10FFFF
+const MAX_CODE_POINT = 0x10FFFF; // == 1114111 in decimal.
+const unicodeData = JSON.parse(JSON.stringify(unicodeDataJson));
 
 /**
  * Get the description/name from the object.
  */
 function getUnicodeData(codePoint: number): string {
-	let description = unicodeData[codePoint];
+	const key = codePoint.toString(10);
+	let description = unicodeData[key];
 	if (codePoint > MAX_CODE_POINT) {
 		description = "(Too big)";
 	} else if (description === undefined || description === "" || description === null) {
@@ -53,9 +55,8 @@ class UnicodeHover implements vscode.HoverProvider {
 		return new Promise((resolve, reject) => {
 			if (word.match(unicodeRegexAny)) {
 				const codePoint = parseInt(word.match(unicodeRegexAny)![1], 16);
-				console.log(`${codePoint} > ${MAX_CODE_POINT}`);
-
 				let markdown = makeMarkdown(codePoint);
+
 				resolve(new vscode.Hover(markdown));
 			} else {
 				reject("Not a Unicode escape.");
