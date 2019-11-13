@@ -5,3 +5,6 @@ node_modules
 src/test/.mypy_cache
 .mypy_cache
 .DS_Store
+.env
+data/*.xml
+data/*.json
