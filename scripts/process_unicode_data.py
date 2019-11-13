@@ -5,11 +5,10 @@ from __future__ import annotations
 from typing import *
 
 import re
+import csv
 import json
-import sqlite3
 from pathlib import Path
 from itertools import chain
-from collections import OrderedDict as OrdDict
 
 import lxml.builder as builder
 from lxml import etree as ET
@@ -45,6 +44,22 @@ char_tag = elt.char().tag
 # UNIHAN_EXT_D_LO = 0x2B740
 # UNIHAN_EXT_D_HI = 0x2B81F
 
+# Get data for Tangut.
+TANGUT_TSV = DATA / "tangutdb-4-0.tsv"
+if not TANGUT_TSV.is_file():
+    quit(
+        "Run `wget http://www.amritas.com/Tangut/tangutdb-4-0.xls` to get the XLS file (.xls=2.1M). Convert it to a .tsv before proceeding."
+    )
+
+# Read and store the Tangut data.
+with TANGUT_TSV.open(mode="r", encoding="utf-8") as tangut_tsv:
+    tangut_data = csv.DictReader(tangut_tsv, delimiter="\t")
+
+    # Store a Dict[hex_code, pronunciation]. (Remove the `U+` at the start of the hex codes.)
+    tangut_pronunciations = {
+        (data["Unicode"][2:]): data["Complex"] for data in tangut_data
+    }
+
 
 def get_alias(char_elt: ET.Element) -> str:
     aliases: List[str] = []
@@ -69,17 +84,23 @@ def yield_non_unihan(
             continue
         block = char.get("blk")
         if block == "Nushu":
-            _name = ideograph_octothorpe.sub("", char.get("na"))
+            _name = ideograph_octothorpe.sub("", char.get("na")).title()
             reading = char.get("kReading", "")
             nushu_duben = "(NǚshūDūběn: " + (char.get("kSrc_NushuDuben", "?")) + ")"
             name = " ".join((_name, reading, nushu_duben))
         elif block == "Tangut":
-            _name = ideograph_octothorpe.sub("", char.get("na"))
-            tangut_source = "(Ref: " + (char.get("kTGT_MergedSrc", "?")) + ")"
-            name = " ".join((_name, tangut_source))
+            _name = ideograph_octothorpe.sub("", char.get("na")).title()
+            tangut_source = "(" + (char.get("kTGT_MergedSrc", "?")) + ")"
+            name = " ".join(
+                (
+                    _name,
+                    tp if (tp := tangut_pronunciations.get(codepoint, "(pron. unknown)")) != "?" else "(pron. uncertain)", # Walrus operator in the wild!
+                    tangut_source,
+                )
+            )
         else:
-            name = char.get("na") or char.get("na1") or get_alias(char)
-        yield (int(codepoint, base=16), name.title())
+            name = (char.get("na") or char.get("na1") or get_alias(char)).title()
+        yield (int(codepoint, base=16), name)
 
 
 def yield_unihan(path: Path = UNIHAN_XML) -> Generator[Tuple[int, str], None, None]:
