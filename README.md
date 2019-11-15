@@ -66,6 +66,10 @@ The data for this project were taken from the [Unicode Consortium](https://home.
 
 The pronunciations for Tangut are from [Tangut database v4.0](http://www.amritas.com/Tangut/tangutdb-4-0.xls) and are the work of Marc Miyake, used here with his permission.
 
+## License
+
+This extension is intended to be used by any- and everyone. It uses the [MIT License](https://github.com/jamesohortle/UnicodeHover/blob/master/LICENSE.txt).
+
 ## About the icon
 
 The character in the icon is `U+1234 ETHIOPIC SYLLABLE SEE`, which is part of the Geʽez script used for several Ethiopic languages, in particular Amharic. Although `SEE` is most likely pronounced `seː`, it represents the idea that you can "see" glyphs as easily as 1, 2, 3(, 4). It also just looks pretty!
