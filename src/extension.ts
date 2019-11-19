@@ -25,11 +25,12 @@ function getUnicodeData(codePoint: number): string {
  * - the description
  * - an external link
  */
-function makeMarkdown(codePoint: number): vscode.MarkdownString {
+function makeMarkdown(codePoint: number, isSurrogate: boolean = false): vscode.MarkdownString {
 	const glyph = codePoint <= MAX_CODE_POINT ? String.fromCodePoint(codePoint) : "\u{fffd}";
 	const description = getUnicodeData(codePoint);
 	const externalLink = "https://unicode-table.com/en/" + (codePoint <= MAX_CODE_POINT ? codePoint.toString(16).toUpperCase() : "");
-	const markdown = `${glyph} [${description}](${externalLink}) (UnicodeHover)`;
+	const surrogateNotification = isSurrogate ? " (surrogate pair) " : "";
+	const markdown = `${glyph} [${description}](${externalLink})${surrogateNotification} (UnicodeHover)`;
 	return new vscode.MarkdownString(markdown);
 }
 
