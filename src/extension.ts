@@ -249,14 +249,35 @@ class TexUnicodeHover implements vscode.HoverProvider {
 
 /**
  * Provide a hover for Java files and the Unicode escapes therein.
- * There is only one form \uabcd to support.
+ * Support \u1234 form and surrogate pair form.
  */
 class JavaUnicodeHover implements vscode.HoverProvider {
+
+	// Java encodes code points in [U+010000, U+10FFF] as surrogate pairs,
+	// called leading and trailing, or high and low, surrogates.
+	private leadingSurrogateRange = [0xD800, 0xDBFF];
+	private trailingSurrogateRange = [0xDC00, 0xDFFF];
+
+	private convertSurrogatePair(leadSurrogate: string, trailSurrogate: string): number {
+		const lead = parseInt(leadSurrogate, 16);
+		const trail = parseInt(trailSurrogate, 16);
+
+		if (!(this.leadingSurrogateRange[0] <= lead || lead <= this.leadingSurrogateRange[1])) {
+			return -1;
+		}
+		if (!(this.trailingSurrogateRange[0] <= trail || trail <= this.trailingSurrogateRange[1])) {
+			return -1;
+		}
+
+		const codePoint = 0x10000 + (0x400 * (lead - 0xD800)) + (trail - 0xDC00);
+		return codePoint;
+	}
+
 	public provideHover(
 		document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
 	): Thenable<vscode.Hover> {
-		let unicodeRegexAny = new RegExp(/\\(u+)([\da-fA-F]{4})/); // General form.
-
+		const unicodeRegexAny = new RegExp(/(\\(u+)([\da-fA-F]{4})){1,2}/); // General form.
+		const surrogatePairRegex = new RegExp(/\\(u+)([dD][89AB][\da-fA-F]{2})\\(u+)([dD][c-fC-F][\da-fA-F]{2})/);
 		const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
 
 		if (range === undefined) {
@@ -268,8 +289,18 @@ class JavaUnicodeHover implements vscode.HoverProvider {
 		console.log(`JavaUnicodeHover ${word}`);
 
 		return new Promise((resolve, reject) => {
-			if (word.match(unicodeRegexAny)) {
-				let codePoint = parseInt(word.match(unicodeRegexAny)![2], 16);
+			if (word.match(surrogatePairRegex)) {
+				const leading = word.match(surrogatePairRegex)![2];
+				const trailing = word.match(surrogatePairRegex)![4];
+				let codePoint = this.convertSurrogatePair(leading, trailing);
+				if (codePoint < 0x0000 || codePoint > 0x10FFFF) {
+					reject(`Surrogate pair ${word} detected, but final codepoint ${codePoint.toString(16)} not found.`);
+				}
+				let markdown = makeMarkdown(codePoint, true);
+
+				resolve(new vscode.Hover(markdown));
+			} else if (word.match(unicodeRegexAny)) {
+				let codePoint = parseInt(word.match(unicodeRegexAny)![3], 16);
 				let markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
