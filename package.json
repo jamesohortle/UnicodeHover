@@ -16,7 +16,8 @@
 		"onLanguage:python",
 		"onLanguage:javascript",
 		"onLanguage:typescript",
-		"onLanguage:latex"
+		"onLanguage:latex",
+		"onLanguage:java"
 	],
 	"main": "out/extension",
 	"contributes": {},
