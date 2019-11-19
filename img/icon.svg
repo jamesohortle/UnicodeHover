@@ -1,0 +1,28 @@
+<svg version="1.1" viewBox="0.0 0.0 960.0 540.0" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+    <clipPath id="p.0">
+        <path d="m0 0l960.0 0l0 540.0l-960.0 0l0 -540.0z" clip-rule="nonzero"/>
+    </clipPath>
+    <g clip-path="url(#p.0)">
+        <path fill="#ffffff" opacity=0 d="m0 0l960.0 0l0 540.0l-960.0 0z" fill-rule="evenodd"/>
+        <g filter="url(#shadowFilter-p.1)">
+            <use xlink:href="#p.1" transform="matrix(1.0 0.0 0.0 1.0 0.0 2.0)"/>
+        </g>
+        <defs>
+            <filter id="shadowFilter-p.1" filterUnits="userSpaceOnUse">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="2.0" result="blur"/>
+                <feComponentTransfer in="blur" color-interpolation-filters="sRGB">
+                    <feFuncR type="linear" slope="0" intercept="0.0"/>
+                    <feFuncG type="linear" slope="0" intercept="0.0"/>
+                    <feFuncB type="linear" slope="0" intercept="0.0"/>
+                    <feFuncA type="linear" slope="0.0" intercept="0"/>
+                </feComponentTransfer>
+            </filter>
+        </defs>
+        <g id="p.1">
+            <path fill="#000000" d="m373.9685 236.09186l0 0c0 -53.019333 42.98065 -96.0 96.0 -96.0l0 0c25.460785 0 49.878784 10.114258 67.88226 28.117752c18.003479 18.003494 28.117737 42.421463 28.117737 67.88225l0 0c0 53.01935 -42.98065 96.0 -96.0 96.0l0 0c-53.01935 0 -96.0 -42.98065 -96.0 -96.0z" fill-rule="evenodd"/>
+            <path stroke="#595959" stroke-width="1.0" stroke-linejoin="round" stroke-linecap="butt" d="m373.9685 236.09186l0 0c0 -53.019333 42.98065 -96.0 96.0 -96.0l0 0c25.460785 0 49.878784 10.114258 67.88226 28.117752c18.003479 18.003494 28.117737 42.421463 28.117737 67.88225l0 0c0 53.01935 -42.98065 96.0 -96.0 96.0l0 0c-53.01935 0 -96.0 -42.98065 -96.0 -96.0z" fill-rule="evenodd"/>
+        </g>
+        <path fill="#000000" fill-opacity="0.0" d="m394.0315 140.09186l171.93701 0l0 208.15747l-171.93701 0z" fill-rule="evenodd"/>
+        <path fill="#ffffff" d="m436.34375 271.97186l0 -46.0625q0 -13.3125 5.1875 -21.5625q5.1875 -8.25 14.9375 -10.8125l0 -18.8125l18.9375 0l0 18.6875q9.9375 2.5 15.0625 10.84375q5.125 8.34375 5.125 21.90625l0 5.625l8.1875 0q12.1875 0 18.59375 4.96875q6.40625 4.96875 6.40625 14.21875q0 9.75 -7.625 15.375q-7.625 5.625 -20.8125 5.625l-23.6875 0l0 -46.4375q0 -9.1875 -2.65625 -13.375q-2.65625 -4.1875 -8.21875 -4.1875q-5.3125 0 -7.90625 4.25q-2.59375 4.25 -2.59375 13.4375l0 46.3125l-18.9375 0zm59.25 -27.5l0 14.8125l1.3125 0q6.625 0 9.90625 -1.90625q3.28125 -1.90625 3.28125 -6.28125q0 -3.75 -2.65625 -5.1875q-2.65625 -1.4375 -7.59375 -1.4375l-4.25 0z" fill-rule="nonzero"/>
+    </g>
+</svg>
