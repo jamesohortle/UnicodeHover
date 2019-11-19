@@ -30,7 +30,8 @@ function makeMarkdown(codePoint: number, isSurrogate: boolean = false): vscode.M
 	const description = getUnicodeData(codePoint);
 	const externalLink = "https://unicode-table.com/en/" + (codePoint <= MAX_CODE_POINT ? codePoint.toString(16).toUpperCase() : "");
 	const surrogateNotification = isSurrogate ? " (surrogate pair) " : "";
-	const markdown = `${glyph} [${description}](${externalLink})${surrogateNotification} (UnicodeHover)`;
+	const inlineIcon = "![img](https://raw.githubusercontent.com/jamesohortle/UnicodeHover/dev/img/icon_inline.png)";
+	const markdown = `${glyph} [${description}](${externalLink})${surrogateNotification} (UnicodeHover)${inlineIcon}`;
 	return new vscode.MarkdownString(markdown);
 }
 
