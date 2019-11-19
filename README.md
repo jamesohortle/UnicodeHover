@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./img/icon.svg" width=100 height=100 />
+    <img src="./img/icon.svg" width=256 height=256 />
 <!-- <img src="https://raw.githubusercontent.com/jamesohortle/UnicodeHover/dev/img/icon_transparent.png" width=100 height=100 /> -->
 </p>
 
