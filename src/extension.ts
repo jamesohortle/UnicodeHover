@@ -269,7 +269,7 @@ class JavaUnicodeHover implements vscode.HoverProvider {
 
 		return new Promise((resolve, reject) => {
 			if (word.match(unicodeRegexAny)) {
-				let codePoint = parseInt(word.match(unicodeRegexAny)![1], 16);
+				let codePoint = parseInt(word.match(unicodeRegexAny)![2], 16);
 				let markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
@@ -289,6 +289,7 @@ export function activate(context: vscode.ExtensionContext): void {
 	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'javascript' }, new JSUnicodeHover()));
 	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'typescript' }, new JSUnicodeHover())); // TS has same escapes as JS.
 	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'latex' }, new TexUnicodeHover()));
+	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'java' }, new JavaUnicodeHover()));
 	console.log("UnicodeHover: providers pushed.");
 }
 
