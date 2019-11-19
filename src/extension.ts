@@ -138,25 +138,21 @@ class JSUnicodeHover implements vscode.HoverProvider {
 				let markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
-				return;
 			} else if (word.match(unicodeRegex4)) {
 				let codePoint = parseInt(word.match(unicodeRegex4)![1], 16);
 				let markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
-				return;
 			} else if (word.match(unicodeRegex2)) {
 				let codePoint = parseInt(word.match(unicodeRegex2)![1], 16);
 				let markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
-				return;
 			} else if (word.match(unicodeRegexOct)) {
 				let codePoint = parseInt(word.match(unicodeRegexOct)![1], 8);
 				let markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
-				return;
 			} else {
 				reject("Not a Unicode escape.");
 			}
@@ -200,57 +196,83 @@ class TexUnicodeHover implements vscode.HoverProvider {
 				let markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
-				return;
 			} else if (word.match(unicodeRegexCharOct)) {
 				let codePoint = parseInt(word.match(unicodeRegexCharOct)![1], 8);
 				let markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
-				return;
 			} else if (word.match(unicodeRegexCharHex)) {
 				let codePoint = parseInt(word.match(unicodeRegexCharHex)![1], 16);
 				let markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
-				return;
 			} else if (word.match(unicodeRegexUcharDec)) {
 				let codePoint = parseInt(word.match(unicodeRegexUcharDec)![1], 10);
 				let markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
-				return;
 			}
 			else if (word.match(unicodeRegexUcharOct)) {
 				let codePoint = parseInt(word.match(unicodeRegexUcharOct)![1], 8);
 				let markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
-				return;
 			} else if (word.match(unicodeRegexUcharHex)) {
 				let codePoint = parseInt(word.match(unicodeRegexUcharHex)![1], 16);
 				let markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
-				return;
 			} else if (word.match(unicodeRegexPrimitive6)) {
 				let codePoint = parseInt(word.match(unicodeRegexPrimitive6)![1], 16);
 				let markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
-				return;
 			}
 			else if (word.match(unicodeRegexPrimitive4)) {
 				let codePoint = parseInt(word.match(unicodeRegexPrimitive4)![1], 16);
 				let markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
-				return;
 			} else if (word.match(unicodeRegexPrimitive2)) {
 				let codePoint = parseInt(word.match(unicodeRegexPrimitive2)![1], 16);
 				let markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
-				return;
+			} else {
+				reject("Not a Unicode escape.");
+			}
+		});
+	}
+
+	public dispose() { }
+}
+
+/**
+ * Provide a hover for Java files and the Unicode escapes therein.
+ * There is only one form \uabcd to support.
+ */
+class JavaUnicodeHover implements vscode.HoverProvider {
+	public provideHover(
+		document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
+	): Thenable<vscode.Hover> {
+		let unicodeRegexAny = new RegExp(/\\(u+)([\da-fA-F]{4})/); // General form.
+
+		const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
+
+		if (range === undefined) {
+			return new Promise((resolve, _reject) => {
+				resolve(); // Resolve silently.
+			});
+		}
+		const word = document.getText(range);
+		console.log(`JavaUnicodeHover ${word}`);
+
+		return new Promise((resolve, reject) => {
+			if (word.match(unicodeRegexAny)) {
+				let codePoint = parseInt(word.match(unicodeRegexAny)![1], 16);
+				let markdown = makeMarkdown(codePoint);
+
+				resolve(new vscode.Hover(markdown));
 			} else {
 				reject("Not a Unicode escape.");
 			}
