@@ -19,9 +19,6 @@
 		"onLanguage:latex"
 	],
 	"main": "out/extension",
-	"files": [
-		"src/unicode_data.ts"
-	],
 	"contributes": {},
 	"scripts": {
 		"compile": "tsc -p ./",
