@@ -80,3 +80,5 @@ This extension is intended to be used by any- and everyone. It uses the [MIT Lic
 ## About the icon
 
 The character in the icon is `U+1234 ETHIOPIC SYLLABLE SEE`, which is part of the Geʽez script used for several Ethiopic languages, in particular Amharic. Although `SEE` is most likely pronounced `seː`, it represents the idea that you can "see" glyphs as easily as 1, 2, 3(, 4). It also just looks pretty!
+
+Thanks to Misato Inoue for design help with the icon!
