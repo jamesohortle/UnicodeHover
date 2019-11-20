@@ -42,7 +42,7 @@ class UnicodeHover implements vscode.HoverProvider {
 	public provideHover(
 		document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
 	): Thenable<vscode.Hover> {
-		let unicodeRegexAny = new RegExp(/U\+([A-F\d]{4,6})/);
+		const unicodeRegexAny = new RegExp(/U\+([A-F\d]{4,6})/);
 
 		const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
 
@@ -56,7 +56,7 @@ class UnicodeHover implements vscode.HoverProvider {
 		return new Promise((resolve, reject) => {
 			if (word.match(unicodeRegexAny)) {
 				const codePoint = parseInt(word.match(unicodeRegexAny)![1], 16);
-				let markdown = makeMarkdown(codePoint);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			} else {
@@ -77,9 +77,9 @@ class PyUnicodeHover implements vscode.HoverProvider {
 	public provideHover(
 		document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
 	): Thenable<vscode.Hover> {
-		let unicodeRegexAny = new RegExp(/\\(u|U)([\da-fA-F]{4,8})/); // General form.
-		let unicodeRegex4 = new RegExp(/\\u([\da-fA-F]{4})/); // Short form: "\uabcd".
-		let unicodeRegex8 = new RegExp(/\\U([\da-fA-F]{8})/); // Long form: "\Uabcd1234".
+		const unicodeRegexAny = new RegExp(/\\(u|U)([\da-fA-F]{4,8})/); // General form.
+		const unicodeRegex4 = new RegExp(/\\u([\da-fA-F]{4})/); // Short form: "\uabcd".
+		const unicodeRegex8 = new RegExp(/\\U([\da-fA-F]{8})/); // Long form: "\Uabcd1234".
 
 		const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
 		if (range === undefined) {
@@ -91,13 +91,13 @@ class PyUnicodeHover implements vscode.HoverProvider {
 		console.log(`PyUnicodeHover: ${word}`);
 		return new Promise((resolve, reject) => {
 			if (word.match(unicodeRegex8)) {
-				let codePoint = parseInt(word.match(unicodeRegex8)![1], 16);
-				let markdown = makeMarkdown(codePoint);
+				const codePoint = parseInt(word.match(unicodeRegex8)![1], 16);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			} else if (word.match(unicodeRegex4)) {
-				let codePoint = parseInt(word.match(unicodeRegex4)![1], 16);
-				let markdown = makeMarkdown(codePoint);
+				const codePoint = parseInt(word.match(unicodeRegex4)![1], 16);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			} else {
@@ -117,11 +117,11 @@ class JSUnicodeHover implements vscode.HoverProvider {
 	public provideHover(
 		document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
 	): Thenable<vscode.Hover> {
-		let unicodeRegexAny = new RegExp(/\\(u|x)?\{?([\da-fA-F]+)\}?/); // General form.
-		let unicodeRegexOct = new RegExp(/\\([0-7]{1,3})/); // Octal-escape form: \123.
-		let unicodeRegex2 = new RegExp(/\\x([\da-fA-F]{2})/); // Hex-escape form: "\xA7".
-		let unicodeRegex4 = new RegExp(/\\u([\da-fA-F]{4})/); // Short form: "\uabcd".
-		let unicodeRegex8 = new RegExp(/\\u\{([\da-fA-F]+)\}/); // Long form: "\u{abcd1234}".
+		const unicodeRegexAny = new RegExp(/\\(u|x)?\{?([\da-fA-F]+)\}?/); // General form.
+		const unicodeRegexOct = new RegExp(/\\([0-7]{1,3})/); // Octal-escape form: \123.
+		const unicodeRegex2 = new RegExp(/\\x([\da-fA-F]{2})/); // Hex-escape form: "\xA7".
+		const unicodeRegex4 = new RegExp(/\\u([\da-fA-F]{4})/); // Short form: "\uabcd".
+		const unicodeRegex8 = new RegExp(/\\u\{([\da-fA-F]+)\}/); // Long form: "\u{abcd1234}".
 
 		const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
 
@@ -135,23 +135,23 @@ class JSUnicodeHover implements vscode.HoverProvider {
 
 		return new Promise((resolve, reject) => {
 			if (word.match(unicodeRegex8)) {
-				let codePoint = parseInt(word.match(unicodeRegex8)![1], 16);
-				let markdown = makeMarkdown(codePoint);
+				const codePoint = parseInt(word.match(unicodeRegex8)![1], 16);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			} else if (word.match(unicodeRegex4)) {
-				let codePoint = parseInt(word.match(unicodeRegex4)![1], 16);
-				let markdown = makeMarkdown(codePoint);
+				const codePoint = parseInt(word.match(unicodeRegex4)![1], 16);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			} else if (word.match(unicodeRegex2)) {
-				let codePoint = parseInt(word.match(unicodeRegex2)![1], 16);
-				let markdown = makeMarkdown(codePoint);
+				const codePoint = parseInt(word.match(unicodeRegex2)![1], 16);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			} else if (word.match(unicodeRegexOct)) {
-				let codePoint = parseInt(word.match(unicodeRegexOct)![1], 8);
-				let markdown = makeMarkdown(codePoint);
+				const codePoint = parseInt(word.match(unicodeRegexOct)![1], 8);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			} else {
@@ -171,16 +171,16 @@ class TexUnicodeHover implements vscode.HoverProvider {
 	public provideHover(
 		document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
 	): Thenable<vscode.Hover> {
-		let unicodeRegexAny = new RegExp(/(\\U?char['"]?[\da-fA-F]{1,8}|\^{2,6}[\da-f]{2,6})/); // General form.
-		let unicodeRegexCharDec = new RegExp(/\\char([\d]{1,7})/); // Decimal form: \char98
-		let unicodeRegexCharOct = new RegExp(/\\char'([0-7]{1,8})/); // Octal form: \char'98.
-		let unicodeRegexCharHex = new RegExp(/\\char"([\dA-F]{1,8})/); // Hexadecimal form: \char"98.
-		let unicodeRegexUcharDec = new RegExp(/\\Uchar([\d]{1,7})/); // Decimal form: \Uchar98
-		let unicodeRegexUcharOct = new RegExp(/\\Uchar'([0-7]{1,8})/); // Octal form: \Uchar'98.
-		let unicodeRegexUcharHex = new RegExp(/\\Uchar"([\dA-F]{1,8})/); // Hexadecimal form: \Uchar"98.
-		let unicodeRegexPrimitive6 = new RegExp(/\^{6}([\da-f]{6})/); // Hexadecimal form: ^^^^^^0000ff
-		let unicodeRegexPrimitive4 = new RegExp(/\^{4}([\da-f]{4})/); // 4 hexadecimal: ^^^^00ff
-		let unicodeRegexPrimitive2 = new RegExp(/\^{2}([\da-f]{2})/); // 2 hexadecimal: ^^ff.
+		const unicodeRegexAny = new RegExp(/(\\U?char['"]?[\da-fA-F]{1,8}|\^{2,6}[\da-f]{2,6})/); // General form.
+		const unicodeRegexCharDec = new RegExp(/\\char([\d]{1,7})/); // Decimal form: \char98
+		const unicodeRegexCharOct = new RegExp(/\\char'([0-7]{1,8})/); // Octal form: \char'98.
+		const unicodeRegexCharHex = new RegExp(/\\char"([\dA-F]{1,8})/); // Hexadecimal form: \char"98.
+		const unicodeRegexUcharDec = new RegExp(/\\Uchar([\d]{1,7})/); // Decimal form: \Uchar98
+		const unicodeRegexUcharOct = new RegExp(/\\Uchar'([0-7]{1,8})/); // Octal form: \Uchar'98.
+		const unicodeRegexUcharHex = new RegExp(/\\Uchar"([\dA-F]{1,8})/); // Hexadecimal form: \Uchar"98.
+		const unicodeRegexPrimitive6 = new RegExp(/\^{6}([\da-f]{6})/); // Hexadecimal form: ^^^^^^0000ff
+		const unicodeRegexPrimitive4 = new RegExp(/\^{4}([\da-f]{4})/); // 4 hexadecimal: ^^^^00ff
+		const unicodeRegexPrimitive2 = new RegExp(/\^{2}([\da-f]{2})/); // 2 hexadecimal: ^^ff.
 
 		const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
 
@@ -193,50 +193,50 @@ class TexUnicodeHover implements vscode.HoverProvider {
 		console.log(`TexUnicodeHover ${word}`);
 		return new Promise((resolve, reject) => {
 			if (word.match(unicodeRegexCharDec)) {
-				let codePoint = parseInt(word.match(unicodeRegexCharDec)![1], 10);
-				let markdown = makeMarkdown(codePoint);
+				const codePoint = parseInt(word.match(unicodeRegexCharDec)![1], 10);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			} else if (word.match(unicodeRegexCharOct)) {
-				let codePoint = parseInt(word.match(unicodeRegexCharOct)![1], 8);
-				let markdown = makeMarkdown(codePoint);
+				const codePoint = parseInt(word.match(unicodeRegexCharOct)![1], 8);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			} else if (word.match(unicodeRegexCharHex)) {
-				let codePoint = parseInt(word.match(unicodeRegexCharHex)![1], 16);
-				let markdown = makeMarkdown(codePoint);
+				const codePoint = parseInt(word.match(unicodeRegexCharHex)![1], 16);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			} else if (word.match(unicodeRegexUcharDec)) {
-				let codePoint = parseInt(word.match(unicodeRegexUcharDec)![1], 10);
-				let markdown = makeMarkdown(codePoint);
+				const codePoint = parseInt(word.match(unicodeRegexUcharDec)![1], 10);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			}
 			else if (word.match(unicodeRegexUcharOct)) {
-				let codePoint = parseInt(word.match(unicodeRegexUcharOct)![1], 8);
-				let markdown = makeMarkdown(codePoint);
+				const codePoint = parseInt(word.match(unicodeRegexUcharOct)![1], 8);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			} else if (word.match(unicodeRegexUcharHex)) {
-				let codePoint = parseInt(word.match(unicodeRegexUcharHex)![1], 16);
-				let markdown = makeMarkdown(codePoint);
+				const codePoint = parseInt(word.match(unicodeRegexUcharHex)![1], 16);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			} else if (word.match(unicodeRegexPrimitive6)) {
-				let codePoint = parseInt(word.match(unicodeRegexPrimitive6)![1], 16);
-				let markdown = makeMarkdown(codePoint);
+				const codePoint = parseInt(word.match(unicodeRegexPrimitive6)![1], 16);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			}
 			else if (word.match(unicodeRegexPrimitive4)) {
-				let codePoint = parseInt(word.match(unicodeRegexPrimitive4)![1], 16);
-				let markdown = makeMarkdown(codePoint);
+				const codePoint = parseInt(word.match(unicodeRegexPrimitive4)![1], 16);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			} else if (word.match(unicodeRegexPrimitive2)) {
-				let codePoint = parseInt(word.match(unicodeRegexPrimitive2)![1], 16);
-				let markdown = makeMarkdown(codePoint);
+				const codePoint = parseInt(word.match(unicodeRegexPrimitive2)![1], 16);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			} else {
@@ -293,16 +293,16 @@ class JavaUnicodeHover implements vscode.HoverProvider {
 			if (word.match(surrogatePairRegex)) {
 				const leading = word.match(surrogatePairRegex)![2];
 				const trailing = word.match(surrogatePairRegex)![4];
-				let codePoint = this.convertSurrogatePair(leading, trailing);
+				const codePoint = this.convertSurrogatePair(leading, trailing);
 				if (codePoint < 0x0000 || codePoint > 0x10FFFF) {
 					reject(`Surrogate pair ${word} detected, but final codepoint ${codePoint.toString(16)} not found.`);
 				}
-				let markdown = makeMarkdown(codePoint, true);
+				const markdown = makeMarkdown(codePoint, true);
 
 				resolve(new vscode.Hover(markdown));
 			} else if (word.match(unicodeRegexAny)) {
-				let codePoint = parseInt(word.match(unicodeRegexAny)![3], 16);
-				let markdown = makeMarkdown(codePoint);
+				const codePoint = parseInt(word.match(unicodeRegexAny)![3], 16);
+				const markdown = makeMarkdown(codePoint);
 
 				resolve(new vscode.Hover(markdown));
 			} else {
