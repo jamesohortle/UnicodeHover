@@ -66,7 +66,7 @@ def get_alias(char_elt: ET.Element) -> str:
     for tag in char_elt.getchildren():
         aliases.append(tag.get("alias"))
     aliases = sorted(aliases, key=lambda a: len(a), reverse=True)
-    return aliases[0] + " (alias)"
+    return aliases[0].title() + " (alias)"
 
 
 ideograph_octothorpe = re.compile(r"-#$")
@@ -102,7 +102,7 @@ def yield_non_unihan(
                 )
             )
         else:
-            name = (char.get("na") or char.get("na1") or get_alias(char)).title()
+            name = (char.get("na") or char.get("na1")).title() or get_alias(char)
         yield (int(codepoint, base=16), name)
 
 
