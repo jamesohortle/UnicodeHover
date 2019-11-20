@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./img/icon.png" width=150 height=150 alt-text="UnicodeHover icon"/>
+    <img src="./img/icon.svg" width=150 height=150 alt-text="UnicodeHover icon"/>
 </p>
 
 # UnicodeHover
@@ -47,7 +47,7 @@ Pull requests (in particular for new languages) are welcome.
 
 - Add support for Java, including surrogate pairs.
 - Fix descriptions.
-- Update icon.
+- Update icon (thanks to Misato Inoue for her help).
 
 ### 0.0.3
 
