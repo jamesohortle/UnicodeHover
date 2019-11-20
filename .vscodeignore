@@ -1,9 +1,13 @@
 .vscode/**
 .vscode-test/**
+.circleci/**
 out/test/**
 src/**
 .gitignore
 vsc-extension-quickstart.md
+data/**
+scripts/**
+node_modules/**
 **/tsconfig.json
 **/tslint.json
 **/*.map

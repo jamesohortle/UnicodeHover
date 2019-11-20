@@ -66,14 +66,14 @@ def get_alias(char_elt: ET.Element) -> str:
     for tag in char_elt.getchildren():
         aliases.append(tag.get("alias"))
     aliases = sorted(aliases, key=lambda a: len(a), reverse=True)
-    return aliases[0] + " (alias)"
+    return aliases[0].title() + " (alias)"
 
 
 ideograph_octothorpe = re.compile(r"-#$")
 
 
 def yield_non_unihan(
-    path: Path = NO_UNIHAN_XML
+    path: Path = NO_UNIHAN_XML,
 ) -> Generator[Tuple[int, str], None, None]:
     """Parse non-Unihan data."""
     _path = str(path.resolve())
@@ -94,12 +94,15 @@ def yield_non_unihan(
             name = " ".join(
                 (
                     _name,
-                    tp if (tp := tangut_pronunciations.get(codepoint, "(pron. unknown)")) != "?" else "(pron. uncertain)", # Walrus operator in the wild!
+                    tp
+                    if (tp := tangut_pronunciations.get(codepoint, "(pron. unknown)"))
+                    != "?"
+                    else "(pron. uncertain)",  # Walrus operator in the wild!
                     tangut_source,
                 )
             )
         else:
-            name = (char.get("na") or char.get("na1") or get_alias(char)).title()
+            name = (char.get("na") or char.get("na1")).title() or get_alias(char)
         yield (int(codepoint, base=16), name)
 
 
@@ -110,7 +113,10 @@ def yield_unihan(path: Path = UNIHAN_XML) -> Generator[Tuple[int, str], None, No
     for _, char in unihan:
         codepoint = char.get("cp")
         name = (char.get("kDefinition") or "(No description)") + " (Unified CJK)"
-        name = name[0].upper() + name[1:]
+        name_parts = name.split()
+        name = " ".join(  # Account for non-alphabetic first char. Cf.: U+3400.
+            [name_parts[0].title()] + name_parts[1:]
+        )
         yield (int(codepoint, base=16), name)
 
 

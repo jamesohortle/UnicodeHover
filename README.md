@@ -1,10 +1,10 @@
 <p align="center">
-    <img src="./img/icon.png" widhth=100 height=100>
+    <img src="./img/icon.png" width=150 height=150 alt-text="UnicodeHover icon"/>
 </p>
 
 # UnicodeHover
 
-![img](./img/demo.gif)
+![Demo of UnicodeHover](./img/demo.gif)
 
 [![CircleCI](https://circleci.com/gh/jamesohortle/UnicodeHover/tree/master.svg?style=svg&circle-token=3e37509dd484de97a96efe5931aa37f689a09c15)](https://circleci.com/gh/jamesohortle/UnicodeHover/tree/master)
 
@@ -23,15 +23,15 @@ In any case, it would be handy to immediately have information on the characters
 Simply place your cursor over the escape sequence and a panel will hover over it, showing you the glyph in question.
 
 - Recognizes the code points as used by the Unicode Consortium (`U+` followed by 4 to 6 hexadecimal digits) in any file.
-- Recognizes Unicode escape sequences in Python, JavaScript (TypeScript) and (La)TeX files.
+- Recognizes Unicode escape sequences in Python, JavaScript (TypeScript), TeX (LaTeX) and Java files.
 - Renders a glyph of the character using a system font (see [Requirements](#requirements)).
 - Provides a one-line description of the character in English.
 - Provides a link to the [Unicode Table](https://unicode-table.com) page (no affiliation) for the character for further information.
 
 ## Requirements
 
-- Works on Python, JavaScript, TypeScript or TeX files.
-- TeX files requires [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop) to be installed.
+- Works on Python, JavaScript, TypeScript, TeX, LaTeX and Java files.
+- TeX files require [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop).
 - Needs a system font that defines a glyph for the character to be displayed.
 
 ## Known Issues
@@ -39,10 +39,15 @@ Simply place your cursor over the escape sequence and a panel will hover over it
 Pull requests (in particular for new languages) are welcome.
 
 - Non-printable characters, by definition, do not normally have glyphs associated with them and so usually no glpyhs will be displayed. However, the description and link will still be shown. If a font somewhere on your system defines a glyph for a non-printable character, it will be displayed.
-- ~~On Mac, even if, e.g., `Apple Color Emoji` font is installed, sometimes no glyph or a box is shown.~~ This seems to have resolved.
 - [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop) is required for .tex files.
 
 ## Release Notes
+
+### 0.1.0
+
+- Add support for Java, including surrogate pairs.
+- Fix descriptions.
+- Update icon.
 
 ### 0.0.3
 
@@ -58,7 +63,9 @@ Fix some descriptions.
 
 ### 0.0.1
 
-Alpha!
+First release!
+
+- Support Python, JavaScript, TypeScript and (La)TeX.
 
 ## Data sources
 
