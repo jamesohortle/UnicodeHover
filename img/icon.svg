@@ -1,7 +1,7 @@
 <svg width="256" height="256" xmlns="http://www.w3.org/2000/svg">
     <g>
         <circle id="svg_1" cy="128" cx="128" stroke-width="0" stroke="#000" fill="#000000" r="128"/>
-        <text stroke="#ffffff" font-size="200" id="svg_3" y="180" x="51" fill-opacity="null" stroke-width="6" fill="#ffffff" font-family="Kefa">
+        <text stroke="#ffffff" font-size="200" id="svg_3" y="182" x="50" fill-opacity="null" stroke-width="6" fill="#ffffff" font-family="Kefa">
             &#4660; <!-- ሴ -->
         </text>
     </g>
