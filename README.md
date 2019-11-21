@@ -23,14 +23,14 @@ In any case, it would be handy to immediately have information on the characters
 Simply place your cursor over the escape sequence and a panel will hover over it, showing you the glyph in question.
 
 - Recognizes the code points as used by the Unicode Consortium (`U+` followed by 4 to 6 hexadecimal digits) in any file.
-- Recognizes Unicode escape sequences in Python, JavaScript (TypeScript), TeX (LaTeX) and Java files.
+- Recognizes Unicode escape sequences in Python, JavaScript (TypeScript), TeX (LaTeX), Java, HTML and CSS files.
 - Renders a glyph of the character using a system font (see [Requirements](#requirements)).
 - Provides a one-line description of the character in English.
 - Provides a link to the [Unicode Table](https://unicode-table.com) page (no affiliation) for the character for further information.
 
 ## Requirements
 
-- Works on Python, JavaScript, TypeScript, TeX, LaTeX and Java files.
+- Works on Python, JavaScript, TypeScript, TeX, LaTeX, Java, HTML and CSS files.
 - TeX files require [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop).
 - Needs a system font that defines a glyph for the character to be displayed.
 
@@ -45,8 +45,8 @@ Pull requests (in particular for new languages) are welcome.
 
 ### 0.2.0
 
-- Add support for CSS.
-- Fix rendering bug for Markdown in hover panel.
+- Add support for HTML and CSS.
+- Fix rendering bug for Markdown in hover panel (#9).
 
 ### 0.1.0
 
