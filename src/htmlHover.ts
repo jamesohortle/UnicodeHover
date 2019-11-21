@@ -10,7 +10,7 @@ import { makeMarkdown } from "./unicodeHoverUtils";
 const namedEntities = JSON.parse(JSON.stringify(namedEntitiesJson));
 
 /**
- * Provide a hover for HTML file and the Unicode escapes therein.
+ * Provide a hover for HTML files and the Unicode escapes therein.
  * Syntax for escape sequences (aka character references) defined here:
  * https://html.spec.whatwg.org/multipage/syntax.html#syntax-charref
  */
