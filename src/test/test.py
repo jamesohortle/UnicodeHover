@@ -55,7 +55,6 @@ U+1F639     \U0001f639 -> 😹 Cat Face with Tears of Joy
 # fmt: on
 
 "\UFFFFFFFF"  # � (Too big) [MyPy etc. will throw errors]
-
 "U+0080"
 "U+0081"
 "U+0084"
@@ -75,3 +74,20 @@ U+1F639     \U0001f639 -> 😹 Cat Face with Tears of Joy
 "U+3233"
 "U+07C0"
 "U+3400"
+
+# Test possible markdown rendering errors.
+"\u002d"
+"\u002b"
+"\u0023"
+"\u002a"
+"\u005f"
+"\u007e"
+"\u0029"
+"\u005b"
+"\u005c"
+"\u005d"
+"\u0028"
+"\u0021"
+"\u0060"
+"\u007c"
+"\u003e"

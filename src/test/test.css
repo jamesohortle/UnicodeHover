@@ -1,0 +1,20 @@
+\0 {
+    display: none;
+    content: "U+0000U+0020U+1234U+0B87U+0FDAU+50B7U+1F639";
+}
+
+\31 \32 \33 \34 \35 \36 \37 \38 \39 \00003a \3b \3c \3d \3e \00003f {
+    display: inline;
+}
+
+\000000\000020\001234\000B87\000FdA\0050B7\01F639 {
+    display: block;
+}
+
+\0\20\1234\B87\FdA\50B7\1F639 {
+    display: block;
+}
+
+\10ffff {
+    display: flex;
+}
