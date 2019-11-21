@@ -46,7 +46,7 @@ Pull requests (in particular for new languages) are welcome.
 ### 0.2.0
 
 - Add support for HTML and CSS.
-- Fix rendering bug for Markdown in hover panel (#9).
+- Fix rendering bug for Markdown in hover panel ([#9](https://github.com/jamesohortle/UnicodeHover/issues/9)).
 
 ### 0.1.0
 
