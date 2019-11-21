@@ -18,7 +18,8 @@
 		"onLanguage:typescript",
 		"onLanguage:latex",
 		"onLanguage:java",
-		"onLanguage:html"
+		"onLanguage:html",
+		"onLanguage:css"
 	],
 	"main": "out/extension",
 	"contributes": {},

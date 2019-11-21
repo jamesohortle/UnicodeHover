@@ -5,6 +5,7 @@ import { JavascriptHover } from "./javascriptHover";
 import { LatexHover } from "./latexHover";
 import { JavaHover } from "./javaHover";
 import { HtmlHover } from "./htmlHover";
+import { CssHover } from "./cssHover";
 
 // Provide the hovers.
 export function activate(context: vscode.ExtensionContext): void {
@@ -15,6 +16,7 @@ export function activate(context: vscode.ExtensionContext): void {
 	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'latex' }, new LatexHover()));
 	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'java' }, new JavaHover()));
 	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'html' }, new HtmlHover()));
+	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'css' }, new CssHover()));
 	console.log("UnicodeHover: providers pushed.");
 }
 
