@@ -43,6 +43,11 @@ Pull requests (in particular for new languages) are welcome.
 
 ## Release Notes
 
+### 0.2.0
+
+- Add support for CSS.
+- Fix rendering bug for Markdown in hover panel.
+
 ### 0.1.0
 
 - Add support for Java, including surrogate pairs.
