@@ -45,7 +45,7 @@ Pull requests (in particular for new languages) are welcome.
 
 ### 0.2.0
 
-- Add support for HTML and CSS.
+- Add support for HTML (including named character references) and CSS.
 - Fix rendering bug for Markdown in hover panel (#9).
 
 ### 0.1.0
