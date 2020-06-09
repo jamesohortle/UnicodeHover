@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./img/icon.svg" width=150 height=150 alt-text="UnicodeHover icon"/>
+    <img src="./img/icon.png" width=150 height=150 alt-text="UnicodeHover icon"/>
 </p>
 
 # UnicodeHover
