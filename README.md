@@ -43,6 +43,9 @@ Pull requests (in particular for new languages) are welcome.
 
 ## Release Notes
 
+### 0.2.1
+- Fix security vulnerabilities (lodash and minimist).
+
 ### 0.2.0
 
 - Add support for HTML (including named character/entity references) and CSS.
