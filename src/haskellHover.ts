@@ -7,10 +7,10 @@ import { makeMarkdown } from "./unicodeHoverUtils";
  */
 export class HaskellHover implements vscode.HoverProvider {
     public provideHover(document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken): Thenable<vscode.Hover> {
-        const unicodeRegexAny = new RegExp(/\\(x|o)?[a-fA-F\d]{,7}/);
-        const unicodeRegexOct = new RegExp(/\\o([0-7]){,7}/);
-        const unicodeRegexDec = new RegExp(/\\([\d]){,7}/);
-        const unicodeRegexHex = new RegExp(/\\x([a-fA-F\d]){,6}/);
+        const unicodeRegexAny = new RegExp(/\\(x|o)?[a-fA-F\d]+/);
+        const unicodeRegexOct = new RegExp(/\\o([0-7]+)/);
+        const unicodeRegexDec = new RegExp(/\\(\d+)/);
+        const unicodeRegexHex = new RegExp(/\\x([a-fA-F\d]+)/);
 
         const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
         if (range === undefined) {
