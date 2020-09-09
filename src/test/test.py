@@ -36,6 +36,7 @@ U+1B2C7     \U0001b2c7 -> 𛋇 Nushu Character tang13 (NǚshūDūběn: 53.06)
 U+2B86F     \U0002B86F -> 𫡯 (No description) (Unified CJK) [This is Vietnamese Chữ Nôm, no UCD.]
 U+A000
 U+1F639     \U0001f639 -> 😹 Cat Face with Tears of Joy
+U+08BE
 """
 # fmt: off
 '''
