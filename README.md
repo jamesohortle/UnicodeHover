@@ -16,6 +16,8 @@ unprintables = re.compile(r"[\u0000-\u001f]")
 
 Or perhaps your coworkers don't have the necessary fonts to display glyphs and have used escapes so that their editors don't show them [_mojibake_](https://en.wikipedia.org/wiki/Mojibake) or � (`U+FFFD`).
 
+Maybe your favourite language doesn't even support Unicode literals in source files after a certain version ([looking at you, Haskell](https://gitlab.haskell.org/ghc/ghc/-/issues/15525)) so you have to represent them with an escape.
+
 In any case, it would be handy to immediately have information on the characters being processed instead of, e.g., going to an external website and searching for the codepoint.
 
 ## Usage/Features
@@ -31,7 +33,9 @@ Simply place your cursor over the escape sequence and a panel will hover over it
 ## Requirements
 
 - Works on Python, JavaScript, TypeScript, TeX, LaTeX, Java, HTML, CSS and Haskell files.
-- TeX files require [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop).
+    - Language support needs to be installed if it does not come default in VS Code.
+    - [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
+    - [Haskell for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=haskell.haskell)
 - Needs a system font that defines a glyph for the character to be displayed.
 
 ## Known Issues
@@ -39,7 +43,6 @@ Simply place your cursor over the escape sequence and a panel will hover over it
 Pull requests (in particular for new languages) are welcome.
 
 - Non-printable characters, by definition, do not normally have glyphs associated with them and so usually no glpyhs will be displayed. However, the description and link will still be shown. If a font somewhere on your system defines a glyph for a non-printable character, it will be displayed.
-- [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop) is required for .tex files.
 
 ## Release Notes
 
