@@ -9,15 +9,26 @@ import { CssHover } from "./cssHover";
 
 // Provide the hovers.
 export function activate(context: vscode.ExtensionContext): void {
-	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file' }, new UnicodeHover()));
-	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'python' }, new PythonHover()));
-	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'javascript' }, new JavascriptHover()));
-	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'typescript' }, new JavascriptHover())); // TS has same escapes as JS.
-	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'latex' }, new LatexHover()));
-	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'java' }, new JavaHover()));
-	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'html' }, new HtmlHover()));
-	context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language: 'css' }, new CssHover()));
-	console.log("UnicodeHover: providers pushed.");
+    const languageProviderMap = {
+        python: PythonHover,
+        javascript: JavascriptHover,
+        javascriptreact: JavascriptHover,
+        typescript: JavascriptHover,
+        typescriptreact: JavascriptHover,
+        json: JavascriptHover,
+        jsonc: JavascriptHover,
+        latex: LatexHover,
+        java: JavaHover,
+        html: HtmlHover,
+        css: CssHover
+    };
+
+    context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file' }, new UnicodeHover()));
+    Object.entries(languageProviderMap).forEach(([language, provider]) => {
+        context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language }, new provider()));
+    });
+
+    console.log("UnicodeHover: providers pushed.");
 }
 
 // this method is called when your extension is deactivated
