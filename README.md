@@ -42,7 +42,7 @@ Simply place your cursor over the escape sequence and a panel will hover over it
 
 Pull requests (in particular for new languages) are welcome.
 
-- Non-printable characters, by definition, do not normally have glyphs associated with them and so usually no glpyhs will be displayed. However, the description and link will still be shown. If a font somewhere on your system defines a glyph for a non-printable character, it will be displayed.
+- Non-printable characters, by definition, do not normally have glyphs associated with them and so usually no glyphs will be displayed. However, the description and link will still be shown. If a font somewhere on your system defines a glyph for a non-printable character, it will be displayed.
 
 ## Release Notes
 
