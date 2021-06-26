@@ -69,7 +69,7 @@ def get_alias(char_elt: ET.Element) -> str:
     return aliases[0].title() + " (alias)"
 
 
-ideograph_octothorpe = re.compile(r"-#$")
+ideograph_octothorpe = re.compile(r"#$")
 
 
 def yield_non_unihan(
@@ -84,12 +84,12 @@ def yield_non_unihan(
             continue
         block = char.get("blk")
         if block == "Nushu":
-            _name = ideograph_octothorpe.sub("", char.get("na")).title()
+            _name = ideograph_octothorpe.sub(codepoint, char.get("na")).title()
             reading = char.get("kReading", "")
             nushu_duben = "(NǚshūDūběn: " + (char.get("kSrc_NushuDuben", "?")) + ")"
             name = " ".join((_name, reading, nushu_duben))
         elif block == "Tangut":
-            _name = ideograph_octothorpe.sub("", char.get("na")).title()
+            _name = ideograph_octothorpe.sub(codepoint, char.get("na")).title()
             tangut_source = "(" + (char.get("kTGT_MergedSrc", "?")) + ")"
             name = " ".join(
                 (
@@ -101,6 +101,8 @@ def yield_non_unihan(
                     tangut_source,
                 )
             )
+        elif block == "Khitan_Small_Script":
+            name = ideograph_octothorpe.sub(codepoint, char.get("na")).title()
         else:
             name = (char.get("na") or char.get("na1")).title() or get_alias(char)
         yield (int(codepoint, base=16), name)

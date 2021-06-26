@@ -16,6 +16,8 @@ unprintables = re.compile(r"[\u0000-\u001f]")
 
 Or perhaps your coworkers don't have the necessary fonts to display glyphs and have used escapes so that their editors don't show them [_mojibake_](https://en.wikipedia.org/wiki/Mojibake) or � (`U+FFFD`).
 
+Maybe your favourite language doesn't even support Unicode literals in source files after a certain version ([looking at you, Haskell](https://gitlab.haskell.org/ghc/ghc/-/issues/15525)) so you have to represent them with an escape.
+
 In any case, it would be handy to immediately have information on the characters being processed instead of, e.g., going to an external website and searching for the codepoint.
 
 ## Usage/Features
@@ -23,57 +25,28 @@ In any case, it would be handy to immediately have information on the characters
 Simply place your cursor over the escape sequence and a panel will hover over it, showing you the glyph in question.
 
 - Recognizes the code points as used by the Unicode Consortium (`U+` followed by 4 to 6 hexadecimal digits) in any file.
-- Recognizes Unicode escape sequences in Python, JavaScript (TypeScript), TeX (LaTeX), Java, HTML and CSS files.
+- Recognizes Unicode escape sequences in Python, JavaScript (TypeScript), TeX (LaTeX), Java, HTML, CSS and Haskell files.
 - Renders a glyph of the character using a system font (see [Requirements](#requirements)).
 - Provides a one-line description of the character in English.
 - Provides a link to the [Unicode Table](https://unicode-table.com) page (no affiliation) for the character for further information.
 
 ## Requirements
 
-- Works on Python, JavaScript, TypeScript, TeX, LaTeX, Java, HTML and CSS files.
-- TeX files require [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop).
+- Works on Python, JavaScript, TypeScript, TeX, LaTeX, Java, HTML, CSS and Haskell files.
+    - Language support needs to be installed if it does not come default in VS Code.
+    - [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
+    - [Haskell for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=haskell.haskell)
 - Needs a system font that defines a glyph for the character to be displayed.
 
 ## Known Issues
 
 Pull requests (in particular for new languages) are welcome.
 
-- Non-printable characters, by definition, do not normally have glyphs associated with them and so usually no glpyhs will be displayed. However, the description and link will still be shown. If a font somewhere on your system defines a glyph for a non-printable character, it will be displayed.
-- [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop) is required for .tex files.
+- Non-printable characters, by definition, do not normally have glyphs associated with them and so usually no glyphs will be displayed. However, the description and link will still be shown. If a font somewhere on your system defines a glyph for a non-printable character, it will be displayed.
 
 ## Release Notes
 
-### 0.2.1
-- Fix security vulnerabilities (lodash and minimist).
-
-### 0.2.0
-
-- Add support for HTML (including named character/entity references) and CSS.
-- Fix rendering bug for Markdown in hover panel ([#9](https://github.com/jamesohortle/UnicodeHover/issues/9)).
-
-### 0.1.0
-
-- Add support for Java, including surrogate pairs.
-- Fix descriptions.
-- Update icon (thanks to Misato Inoue for her help).
-
-### 0.0.3
-
-Fix more descriptions.
-
-- Note when a description is an alias.
-- Add Nushu pronunciations.
-- Add Tangut pronunciations (thanks to Marc Miyake and his [Tangut DB v4](http://www.amritas.com/Tangut/tangutdb-4-0.xls)).
-
-### 0.0.2
-
-Fix some descriptions.
-
-### 0.0.1
-
-First release!
-
-- Support Python, JavaScript, TypeScript and (La)TeX.
+See the [changelog](CHANGELOG.md).
 
 ## Data sources
 
