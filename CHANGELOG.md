@@ -1,12 +1,15 @@
 # Change Log
 
-## [Unrealeased]
+## [0.3.0] - 2021-06-26
 ### CHANGED
 - Update data for Unicode 13 release!
 
 ### ADDED
-- Add support for Haskell.
+- Add support for React and JSON.
 - Add changelog.
+
+### SECURITY
+- Fix security vulnerabilities (y18n, lodash, glob-parent).
 
 ## [0.2.1] - 2020-09-10
 ### SECURITY
