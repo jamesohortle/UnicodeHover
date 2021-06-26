@@ -8,3 +8,4 @@ src/test/.mypy_cache
 .env
 data/*.xml
 data/*.json
+data/*.zip

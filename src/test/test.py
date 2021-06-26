@@ -31,11 +31,17 @@ U+0B87\u0b87 \U00000b87 -> இ Tamil Letter I
 U+0FDA \u0fda \U00000FDA -> ࿚ Tibetan Mark Trailing Mchan Rtags
 U+32FF\u32ff\U000032FF -> ㋿ Square Era Name Reiwa
 U+50B7\u50B7\U000050B7 -> 傷 Wound, injury; fall ill from (Unified CJK)
-U+17000     \U00017000 -> 𗀀 Tangut Ideograph 1do1 (L2008-0008)
-U+1B2C7     \U0001b2c7 -> 𛋇 Nushu Character tang13 (NǚshūDūběn: 53.06)
+U+17000     \U00017000 -> 𗀀 Tangut Ideograph-17000 1do1 (L2008-0008)
+U+1B2C7     \U0001b2c7 -> 𛋇 Nushu Character-1B2C7 tang13 (NǚshūDūběn: 53.06)
 U+2B86F     \U0002B86F -> 𫡯 (No description) (Unified CJK) [This is Vietnamese Chữ Nôm, no UCD.]
-U+A000
 U+1F639     \U0001f639 -> 😹 Cat Face with Tears of Joy
+U+08BE\u08BE\U000008BE -> ࢾ Arabic Letter Peh with Small V
+U+10E80     \U00010E80 -> 𐺀 Yezidi Letter Elif
+U+11900     \U00011900 -> 𑤀 Dives Akuru Letter A
+U+18B01     \U00018B01 -> 𘬁 Khitan Small Script Character-18B01
+U+10FB0     \U00010FB0 -> 𐾰 Chorasmian Letter Aleph
+U+1FAC0     \U0001FAC0 -> 🫀 Anatomical Heart
+U+1FBB2U+1FBB3
 """
 # fmt: off
 '''
@@ -54,7 +60,7 @@ U+1F639     \U0001f639 -> 😹 Cat Face with Tears of Joy
 '''
 # fmt: on
 
-"\UFFFFFFFF"  # � (Too big) [MyPy etc. will throw errors]
+# "\UFFFFFFFF"  # � (Too big) [MyPy etc. will throw errors]
 "U+0080"
 "U+0081"
 "U+0084"

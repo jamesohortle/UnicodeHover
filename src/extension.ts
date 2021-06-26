@@ -6,6 +6,7 @@ import { LatexHover } from "./latexHover";
 import { JavaHover } from "./javaHover";
 import { HtmlHover } from "./htmlHover";
 import { CssHover } from "./cssHover";
+import { HaskellHover } from "./haskellHover";
 
 // Provide the hovers.
 export function activate(context: vscode.ExtensionContext): void {
