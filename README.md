@@ -25,17 +25,17 @@ In any case, it would be handy to immediately have information on the characters
 Simply place your cursor over the escape sequence and a panel will hover over it, showing you the glyph in question.
 
 - Recognizes the code points as used by the Unicode Consortium (`U+` followed by 4 to 6 hexadecimal digits) in any file.
-- Recognizes Unicode escape sequences in Python, JavaScript (TypeScript), TeX (LaTeX), Java, HTML, CSS and Haskell files.
+- Recognizes Unicode escape sequences in Python, JavaScript (TypeScript), TeX (LaTeX), Java, HTML, CSS and ~~Haskell~~ files.
 - Renders a glyph of the character using a system font (see [Requirements](#requirements)).
 - Provides a one-line description of the character in English.
 - Provides a link to the [Unicode Table](https://unicode-table.com) page (no affiliation) for the character for further information.
 
 ## Requirements
 
-- Works on Python, JavaScript, TypeScript, TeX, LaTeX, Java, HTML, CSS and Haskell files.
+- Works on Python, JavaScript, TypeScript, TeX, LaTeX, Java, HTML, CSS and ~~Haskell~~ files.
     - Language support needs to be installed if it does not come default in VS Code.
     - [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
-    - [Haskell for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=haskell.haskell)
+    - ~~[Haskell for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=haskell.haskell)~~
 - Needs a system font that defines a glyph for the character to be displayed.
 
 ## Known Issues
@@ -43,6 +43,7 @@ Simply place your cursor over the escape sequence and a panel will hover over it
 Pull requests (in particular for new languages) are welcome.
 
 - Non-printable characters, by definition, do not normally have glyphs associated with them and so usually no glyphs will be displayed. However, the description and link will still be shown. If a font somewhere on your system defines a glyph for a non-printable character, it will be displayed.
+- The hover for Haskell currently does not work well; see [#12](https://github.com/jamesohortle/UnicodeHover/issues/12). Any help on this is gladly welcomed!
 
 ## Release Notes
 
