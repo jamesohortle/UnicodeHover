@@ -29,14 +29,14 @@ export class JavaHover implements vscode.HoverProvider {
 
     public provideHover(
         document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
-    ): Thenable<vscode.Hover> {
+    ): Thenable<vscode.Hover | undefined> {
         const unicodeRegexAny = new RegExp(/(\\(u+)([\da-fA-F]{4})){1,2}/); // General form.
         const surrogatePairRegex = new RegExp(/\\(u+)([dD][89AB][\da-fA-F]{2})\\(u+)([dD][c-fC-F][\da-fA-F]{2})/);
         const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
 
         if (range === undefined) {
             return new Promise((resolve, _reject) => {
-                resolve(); // Resolve silently.
+                resolve(undefined); // Resolve silently.
             });
         }
         const word = document.getText(range);

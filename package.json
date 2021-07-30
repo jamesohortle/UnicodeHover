@@ -15,7 +15,11 @@
 	"activationEvents": [
 		"onLanguage:python",
 		"onLanguage:javascript",
+		"onLanguage:javascriptreact",
 		"onLanguage:typescript",
+		"onLanguage:typescriptreact",
+		"onLanguage:json",
+		"onLanguage:jsonc",
 		"onLanguage:latex",
 		"onLanguage:java",
 		"onLanguage:html",

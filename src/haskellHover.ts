@@ -10,7 +10,7 @@ const haskellEscapes = JSON.parse(JSON.stringify(haskellEscapesJson));
  * Decimal, hexadecimal and octal forms are supported.
  */
 export class HaskellHover implements vscode.HoverProvider {
-    public provideHover(document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken): Thenable<vscode.Hover> {
+    public provideHover(document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken): Thenable<vscode.Hover | undefined> {
 
         /**
          * Check for Haskell-specific escapes first.
@@ -74,7 +74,7 @@ export class HaskellHover implements vscode.HoverProvider {
         const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
         if (range === undefined) {
             return new Promise((resolve, _reject) => {
-                resolve(); // Resolve silently.
+                resolve(undefined); // Resolve silently.
             });
         }
 

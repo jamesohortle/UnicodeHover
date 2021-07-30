@@ -8,14 +8,14 @@ import { makeMarkdown } from './unicodeHoverUtils';
 export class UnicodeHover implements vscode.HoverProvider {
     public provideHover(
         document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
-    ): Thenable<vscode.Hover> {
+    ): Thenable<vscode.Hover | undefined> {
         const unicodeRegexAny = new RegExp(/U\+([A-F\d]{4,6})/);
 
         const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
 
         if (range === undefined) {
             return new Promise((resolve, _reject) => {
-                resolve(); // Resolve silently.
+                resolve(undefined); // Resolve silently.
             });
         }
         const word = document.getText(range);
