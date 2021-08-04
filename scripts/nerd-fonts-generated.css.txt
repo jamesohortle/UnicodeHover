@@ -1,0 +1,4 @@
+nerd-fonts-generated.css
+
+Copied from NerdFonts
+https://github.com/ryanoasis/nerd-fonts/blob/ab084963ae51caf4d72e66bfc3230189e68bfd42/css/nerd-fonts-generated.css

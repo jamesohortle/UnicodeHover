@@ -1,0 +1,14 @@
+{
+  "name": "nerdfontdatagenerator",
+  "version": "1.0.0",
+  "description": "Generates NerdFont codepoint descriptions from published NerdFont CSS",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "css-tree": "^1.1.3"
+  }
+}
