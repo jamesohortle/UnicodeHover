@@ -14,6 +14,8 @@ package com.jamesohortle.unicodehover;
  * U+1B2C7 \uuD82C\uuDEC7 -> 𛋇 Nushu Character tang13 (NǚshūDūběn: 53.06)
  * U+2B86F\uuuD86E\uuuDC6F -> 𫡯 (No description) (Unified CJK) [This is Vietnamese Chữ Nôm, no UCD.]
  * U+1F639 \uuuuD83D\uuuuDE39 -> 😹 Cat Face with Tears of Joy
+ * +f1b9\uf1b9\uuuuf1b9 ->  NerdFont Font Awesome nf-fa-automobile
+ * +e7a3\ue7a3\uuuue7a3 ->  NerdFont Devicons nf-dev-code_badge
  */
 public class Main {
 
@@ -35,6 +37,8 @@ public class Main {
             U+2B86F\uuuD86E\uuuDC6F -> 𫡯 (No description) (Unified CJK) [This is Vietnamese Chữ Nôm, no UCD.]
             U+1F639 \uuuuD83D\uuuuDE39 -> 😹 Cat Face with Tears of Joy
             \uD83D \uDE39 -> � (No description) [Undefined if not in a surrogate pair (note space).]
+            U+f1b9\uf1b9\uuuuf1b9 ->  NerdFont Font Awesome nf-fa-automobile
+            U+e7a3\ue7a3\uuuue7a3 ->  NerdFont Devicons nf-dev-code_badge
         '''
     }
 }

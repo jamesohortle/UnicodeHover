@@ -8,7 +8,7 @@ import { makeMarkdown } from "./unicodeHoverUtils";
 export class JavascriptHover implements vscode.HoverProvider {
     public provideHover(
         document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
-    ): Thenable<vscode.Hover> {
+    ): Thenable<vscode.Hover | undefined> {
         const unicodeRegexAny = new RegExp(/\\(u|x)?\{?([\da-fA-F]+)\}?/); // General form.
         const unicodeRegexOct = new RegExp(/\\([0-7]{1,3})/); // Octal-escape form: \123.
         const unicodeRegex2 = new RegExp(/\\x([\da-fA-F]{2})/); // Hex-escape form: "\xA7".
@@ -19,7 +19,7 @@ export class JavascriptHover implements vscode.HoverProvider {
 
         if (range === undefined) {
             return new Promise((resolve, _reject) => {
-                resolve(); // Resolve silently.
+                resolve(undefined); // Resolve silently.
             });
         }
         const word = document.getText(range);

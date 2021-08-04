@@ -25,18 +25,21 @@ In any case, it would be handy to immediately have information on the characters
 Simply place your cursor over the escape sequence and a panel will hover over it, showing you the glyph in question.
 
 - Recognizes the code points as used by the Unicode Consortium (`U+` followed by 4 to 6 hexadecimal digits) in any file.
-- Recognizes Unicode escape sequences in Python, JavaScript (TypeScript), TeX (LaTeX), Java, HTML, CSS and ~~Haskell~~ files.
+- Recognizes Unicode escape sequences in Python, JavaScript (TypeScript), JSON, JSON-C, TeX (LaTeX), Java, HTML, CSS, and ~~Haskell~~ files.
 - Renders a glyph of the character using a system font (see [Requirements](#requirements)).
+  - If the glyph is a NerdFont codepoint, uses the editor font to render the glyph
 - Provides a one-line description of the character in English.
 - Provides a link to the [Unicode Table](https://unicode-table.com) page (no affiliation) for the character for further information.
+- Links to [NerdFonts cheat sheet](https://www.nerdfonts.com/cheat-sheet) (no affiliation) for the glyph for codepoints used by NerdFonts.
 
 ## Requirements
 
-- Works on Python, JavaScript, TypeScript, TeX, LaTeX, Java, HTML, CSS and ~~Haskell~~ files.
+- Works on Python, JavaScript, TypeScript, JSON, JSON-C, TeX, LaTeX, Java, HTML, CSS and ~~Haskell~~ files.
     - Language support needs to be installed if it does not come default in VS Code.
     - [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
     - ~~[Haskell for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=haskell.haskell)~~
 - Needs a system font that defines a glyph for the character to be displayed.
+- Needs the editor font set to a [NerdFont](https://www.nerdfonts.com) for NerdFont codepoint glyphs to be displayed (but if you're working on a file with NerdFont codepoints then you probably already do! 😊)
 
 ## Known Issues
 
@@ -54,6 +57,8 @@ See the [changelog](CHANGELOG.md).
 The data for this project were taken from the [Unicode Consortium](https://home.unicode.org/)'s [Unicode Data](https://www.unicode.org/Public/UCD/latest/) collection. The data follows their licensing (cf.: [terms of use](http://www.unicode.org/terms_of_use.html)).
 
 The pronunciations for Tangut are from [Tangut database v4.0](http://www.amritas.com/Tangut/tangutdb-4-0.xls) and are the work of Marc Miyake, used here with his permission.
+
+Data for the codepoints used by [NerdFonts](https://www.nerdfonts.com) were taken from the [NerdFonts CSS](https://github.com/ryanoasis/nerd-fonts/blob/ab084963ae51caf4d72e66bfc3230189e68bfd42/css/nerd-fonts-generated.css) in the [NerdFonts Github repository](https://github.com/ryanoasis/nerd-fonts). Used here in accordance with the NerdFonts published [LICENSE (MIT)](https://github.com/ryanoasis/nerd-fonts/blob/master/LICENSE)
 
 ## License
 

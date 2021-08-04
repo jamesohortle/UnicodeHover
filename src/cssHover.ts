@@ -8,14 +8,14 @@ import { makeMarkdown } from "./unicodeHoverUtils";
  */
 export class CssHover implements vscode.HoverProvider {
     public provideHover(document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
-    ): Thenable<vscode.Hover> {
+    ): Thenable<vscode.Hover | undefined> {
         const unicodeRegexAny = new RegExp(/\\([a-fA-F\d]{1,6})\u0020?/); // Here's an opportunity to use the extension, while developing the extension. How meta...
 
 
         const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
         if (range === undefined) {
             return new Promise((resolve, _reject) => {
-                resolve(); // Resolve silently.
+                resolve(undefined); // Resolve silently.
             });
         }
 

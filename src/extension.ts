@@ -22,11 +22,12 @@ export function activate(context: vscode.ExtensionContext): void {
         java: JavaHover,
         html: HtmlHover,
         css: CssHover
+        // haskell: HaskellHover
     };
 
-    context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file' }, new UnicodeHover()));
+    context.subscriptions.push(vscode.languages.registerHoverProvider({}, new UnicodeHover()));
     Object.entries(languageProviderMap).forEach(([language, provider]) => {
-        context.subscriptions.push(vscode.languages.registerHoverProvider({ scheme: 'file', language }, new provider()));
+        context.subscriptions.push(vscode.languages.registerHoverProvider({ language }, new provider()));
     });
 
     console.log("UnicodeHover: providers pushed.");

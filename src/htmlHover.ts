@@ -26,7 +26,7 @@ export class HtmlHover implements vscode.HoverProvider {
         return codePoints;
     }
     public provideHover(document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
-    ): Thenable<vscode.Hover> {
+    ): Thenable<vscode.Hover | undefined> {
         const unicodeRegexAny = new RegExp(/\&\#?[a-zA-Z\d]+\;/);
         const unicodeRegexHex = new RegExp(/\&\#x([a-fA-F\d]+)\;/);
         const unicodeRegexDec = new RegExp(/\&\#(\d+)\;/);
@@ -36,7 +36,7 @@ export class HtmlHover implements vscode.HoverProvider {
         const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
         if (range === undefined) {
             return new Promise((resolve, _reject) => {
-                resolve(); // Resolve silently.
+                resolve(undefined); // Resolve silently.
             });
         }
 

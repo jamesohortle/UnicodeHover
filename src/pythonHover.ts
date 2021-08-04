@@ -9,7 +9,7 @@ import { makeMarkdown } from './unicodeHoverUtils';
 export class PythonHover implements vscode.HoverProvider {
     public provideHover(
         document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken
-    ): Thenable<vscode.Hover> {
+    ): Thenable<vscode.Hover | undefined> {
         const unicodeRegexAny = new RegExp(/\\(u|U)([\da-fA-F]{4,8})/); // General form.
         const unicodeRegex4 = new RegExp(/\\u([\da-fA-F]{4})/); // Short form: "\uabcd".
         const unicodeRegex8 = new RegExp(/\\U([\da-fA-F]{8})/); // Long form: "\Uabcd1234".
@@ -17,7 +17,7 @@ export class PythonHover implements vscode.HoverProvider {
         const range = document.getWordRangeAtPosition(position, unicodeRegexAny);
         if (range === undefined) {
             return new Promise((resolve, _reject) => {
-                resolve(); // Resolve silently.
+                resolve(undefined); // Resolve silently.
             });
         }
         const word = document.getText(range);
