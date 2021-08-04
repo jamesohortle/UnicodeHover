@@ -21,8 +21,8 @@ export function activate(context: vscode.ExtensionContext): void {
         latex: LatexHover,
         java: JavaHover,
         html: HtmlHover,
-        css: CssHover,
-        haskell: HaskellHover
+        css: CssHover
+        // haskell: HaskellHover
     };
 
     context.subscriptions.push(vscode.languages.registerHoverProvider({}, new UnicodeHover()));
