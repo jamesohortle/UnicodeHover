@@ -57,6 +57,8 @@ U+17000     \U00017000 -> 𗀀 Tangut Ideograph 1do1 (L2008-0008)
 U+1B2C7     \U0001b2c7 -> 𛋇 Nushu Character tang13 (NǚshūDūběn: 53.06)
 U+2B86F     \U0002B86F -> 𫡯 (No description) (Unified CJK) [This is Vietnamese Chữ Nôm, no UCD.]
 U+1F639     \U0001f639 -> 😹 Cat Face with Tears of Joy
+U+f1b9      \uf1b9\U0000f1b9 ->  NerdFont Font Awesome nf-fa-automobile
+U+e7a3      \ue7a3\U0000e7a3 ->  NerdFont Devicons nf-dev-code_badge
 '''
 # fmt: on
 
